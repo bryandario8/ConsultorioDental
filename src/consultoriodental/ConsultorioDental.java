@@ -31,7 +31,7 @@ public class ConsultorioDental extends Application {
         organizer = new SceneOrganizer();
         organizer.getScene().addEventFilter(MouseEvent.MOUSE_PRESSED, new Quit());
         stagePrincipal.setScene(organizer.getScene());
-        stagePrincipal.setTitle("Typer Shark");
+        stagePrincipal.setTitle("Consultorio Dental");
         //stagePrincipal.getIcons().add(new Image("file:shark-icon-png-4.png"));
         stagePrincipal.show();
 
