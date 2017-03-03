@@ -140,19 +140,22 @@ this.conect = conect;
         table.setEditable(true);
 
         TableColumn nameCol = new TableColumn("Nombre");
+        nameCol.impl_setReorderable(false);
         nameCol.setMinWidth(100);
         nameCol.setCellValueFactory(
-                new PropertyValueFactory<Person, String>("name"));
+                new PropertyValueFactory<SuministroData, String>("nombre"));
 
         TableColumn cantidadCol = new TableColumn("Cantidad");
+        cantidadCol.impl_setReorderable(false);
         cantidadCol.setMinWidth(100);
         cantidadCol.setCellValueFactory(
-                new PropertyValueFactory<Person, Integer>("cantidad"));   
+                new PropertyValueFactory<SuministroData, Integer>("cantidad"));   
 
         TableColumn fechaCol = new TableColumn("Fecha de Vencimiento");
+        fechaCol.impl_setReorderable(false);
         fechaCol.setMinWidth(200);
         fechaCol.setCellValueFactory(
-                new PropertyValueFactory<Person, Date>("fechaVencimiento"));
+                new PropertyValueFactory<SuministroData, Date>("fechaVencimiento"));
 
         table.getColumns().addAll(nameCol, cantidadCol, fechaCol);
 
@@ -388,7 +391,29 @@ this.conect = conect;
 
     }
 
-       
+   
+    public void llenarTabla(){
+        table.getItems().clear();
+        data.clear();
+
+            try {
+                ResultSet rs = this.conect.getSta().executeQuery("select * from usuario;");
+
+                while (rs.next()) {
+                    sumin = new SuministroData(rs.getString("nombre"), rs.getInt("Cantidad"),
+                            rs.getDate("fechaNacimiento"));
+                    this.data.add(sumin);
+                    //System.out.println(rs.getString("nombre"));
+
+                }
+                if (data.isEmpty()) {
+                } else {
+                    table.setItems(data);
+                }
+            } catch (Exception error) {
+            }
+    }
+    
     public Usuario getUsuario(){
         return login.getUsuarioTemp();
     }

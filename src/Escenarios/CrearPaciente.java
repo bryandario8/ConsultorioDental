@@ -569,6 +569,29 @@ public class CrearPaciente {
         }
     }
 
+    public void llenarTabla(){
+        table.getItems().clear();
+            data.clear();
+
+            try {
+                ResultSet rs = this.conect.getSta().executeQuery("select * from paciente;");
+
+                while (rs.next()) {
+                    pacienteTemp = new DataPaciente(rs.getString("cedula"), rs.getString("nombre"), rs.getString("apellido"),
+                            rs.getString("direccion"), rs.getDate("fechaNacimiento"), rs.getString("estadoCivil"),
+                            rs.getString("email"), rs.getString("idUsuario"), rs.getString("idConsultorio"));
+                    this.data.add(pacienteTemp);
+                    //System.out.println(rs.getString("nombre"));
+
+                }
+                if (data.isEmpty()) {
+                } else {
+                    table.setItems(data);
+                }
+            } catch (Exception error) {
+            }
+    }
+    
     public void llenarComboBoxIdUsuario() {
         try {
             ResultSet rs = this.conect.getSta().executeQuery("select * from usuario;");

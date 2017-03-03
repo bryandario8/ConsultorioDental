@@ -270,7 +270,7 @@ public class CrearCita {
     }
 
     public void setButtons() {
-        this.back.setOnZoom(e->{
+        this.back.setOnAction(e->{
             this.selectBack = false;
         });
         this.check.setOnAction(e -> {

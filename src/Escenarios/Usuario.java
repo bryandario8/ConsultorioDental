@@ -217,20 +217,24 @@ public class Usuario {
 
             @Override
             public void changed(ObservableValue<? extends Usuarios> observable, Usuarios oldValue, Usuarios newValue) {
+                try{
+                    usuarioTemp = newValue;
 
-                usuarioTemp = newValue;
-
-                res_idUsuario.setText(usuarioTemp.getIdUsuario());
-                res_nombre.setText(usuarioTemp.getNombre());
-                res_apellido.setText(usuarioTemp.getApellido());
-                res_direccion.setText(usuarioTemp.getDireccion());
-                res_email.setText(usuarioTemp.getEmail());
-                res_profesion.setText(usuarioTemp.getProfesion());
-                res_cargo.setText(usuarioTemp.getCargo());
-                res_consultorio.setText(usuarioTemp.getIdConsultorio());
-                res_idUsuario2.setText(usuarioTemp.getIdUsuario2());
-                datosUsuario.setVisible(false);
-                info1.setVisible(true);
+                    res_idUsuario.setText(usuarioTemp.getIdUsuario());
+                    res_nombre.setText(usuarioTemp.getNombre());
+                    res_apellido.setText(usuarioTemp.getApellido());
+                    res_direccion.setText(usuarioTemp.getDireccion());
+                    res_email.setText(usuarioTemp.getEmail());
+                    res_profesion.setText(usuarioTemp.getProfesion());
+                    res_cargo.setText(usuarioTemp.getCargo());
+                    res_consultorio.setText(usuarioTemp.getIdConsultorio());
+                    res_idUsuario2.setText(usuarioTemp.getIdUsuario2());
+                    datosUsuario.setVisible(false);
+                    info1.setVisible(true);
+                }catch(NullPointerException e){
+                    info1.setVisible(false);
+                    datosUsuario.setVisible(false);
+                }
             }
         });
 
@@ -501,6 +505,29 @@ public class Usuario {
         this.selectBack = selectBack;
     }
 
+    public void llenarTabla(){
+        table.getItems().clear();
+            data.clear();
+
+            try {
+                ResultSet rs = this.conect.getSta().executeQuery("select * from usuario;");
+
+                while (rs.next()) {
+                    usuarioTemp = new Usuarios(rs.getString("idUsuario"), rs.getString("nombre"), rs.getString("apellido"),
+                            rs.getString("direccion"), rs.getString("email"), rs.getString("profesion"),
+                            rs.getString("cargo"), rs.getString("idConsultorio"), rs.getString("idUsuario2"));
+                    this.data.add(usuarioTemp);
+                    //System.out.println(rs.getString("nombre"));
+
+                }
+                if (data.isEmpty()) {
+                } else {
+                    table.setItems(data);
+                }
+            } catch (Exception error) {
+            }
+    }
+    
     public void llenarComboBoxConsultorios() {
         try {
             ResultSet rs = this.conect.getSta().executeQuery("select * from consultorio;");

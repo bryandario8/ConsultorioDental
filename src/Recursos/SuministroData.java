@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class SuministroData {
     String nombre;
-    int cantidad;
+    Integer cantidad;
     Date fechaVencimiento;
     Date fechaRegistro;
     String idProveedor;

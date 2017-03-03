@@ -61,7 +61,8 @@ public class EnCita {
     DatePicker tf_fecha2;
     LocalDate fechaElegida1;
     LocalDate fechaElegida2;
-
+    Button back;
+    
     public EnCita(ConexionSQL conect) {
         this.conect = conect;
         //this.personTemp=persona;

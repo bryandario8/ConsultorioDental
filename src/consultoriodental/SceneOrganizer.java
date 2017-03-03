@@ -141,6 +141,11 @@ public class SceneOrganizer {
             if(usuario.getState()){
                 scene.setRoot(usuario.getRootPane());
                 usuario.setState(false);
+                usuario.llenarTabla();
+            }
+            if(!usuario.getSelectBack()){
+                menu.setState(true);
+                usuario.setSelectBack(true);
             }
             if(servicios.getState()){
                 servicios.setCargo(login.getUsuarioTemp().getCargo());
@@ -160,9 +165,14 @@ public class SceneOrganizer {
                 centro.setState(true);
                 servicios.setSelectCentroEspecializado(true);
             }
+            if(!servicios.getSelectBack()){
+                menu.setState(true);
+                servicios.setSelectBack(true);
+            }
             if (crearPaciente.getState()) {
                 scene.setRoot(crearPaciente.getRootPane());
                 crearPaciente.setState(false);
+                crearPaciente.llenarTabla();
             } 
             if(!crearPaciente.getSelectBack()){
                 menu.setState(true);
@@ -171,14 +181,27 @@ public class SceneOrganizer {
             if(suministro.getState()){
                 scene.setRoot(suministro.getRootPane());
                 suministro.setState(false);
+                suministro.llenarTabla();
+            }
+            if(!suministro.getSelectBack()){
+                servicios.setState(true);
+                suministro.setSelectBack(true);
             }
             if(proveedor.getState()){
                 scene.setRoot(proveedor.getRootPane());
                 proveedor.setState(false);
             }
+            if(!proveedor.getSelectBack()){
+                servicios.setState(true);
+                proveedor.setSelectBack(true);
+            }
             if(centro.getState()){
                 scene.setRoot(centro.getRootPane());
                 centro.setState(false);
+            }
+            if(!centro.getSelectBack()){
+                servicios.setState(true);
+                centro.setSelectBack(true);
             }
             if (citas.getState()) {
                 citas.setCargo(login.getUsuarioTemp().getCargo());
@@ -198,6 +221,10 @@ public class SceneOrganizer {
                 //////noSe.setState(true);
                 citas.setSelectNoSe(true);
             }
+            if(!citas.getSelectBack()){
+                menu.setState(true);
+                citas.setSelectBack(true);
+            }
             
             
             if (crearCita.getState()) { 
@@ -205,7 +232,7 @@ public class SceneOrganizer {
                 crearCita.setState(false);
             }
             if(!crearCita.getSelectBack()){
-                 citas.setState(true);
+                citas.setState(true);
                 crearCita.setSelectBack(true);
             }
             
