@@ -5,6 +5,7 @@
  */
 package Escenarios;
 
+import Constantes.Settings;
 import Recursos.DataPaciente;
 import Recursos.ConexionSQL;
 
@@ -39,6 +40,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -71,6 +74,8 @@ public class CrearPaciente {
 
     String option = "";
 
+    ImageView fondo;
+    
     ConexionSQL conect;
 
     VBox info;
@@ -92,23 +97,30 @@ public class CrearPaciente {
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Boolean state=false;
     Boolean selectBack=true;
+    
     public CrearPaciente(ConexionSQL conect) {
         this.conect = conect;
         //this.personTemp=persona;
         this.rootPane = new StackPane();
+        
+        fondo = new ImageView();
+        fondo.setImage(new Image("Img/fondo2.jpg"));
+        fondo.setFitWidth(Settings.SCENE_WIDTH + 20);
+        fondo.setFitHeight(Settings.SCENE_HEIGHT + 130);
+
 
         tf_search = new TextField();
-        search = new Button("Buscar");
+        search = new Button("Search");
         plus = new Button("+");
         modif = new Button("Modificar");
-        back = new Button("Volver");
+        back = new Button("Back");
         clear = new Button("Limpiar");
         ingresar = new Button("Guardar");
         cancel = new Button("Cancelar");
 
         ToggleGroup group = new ToggleGroup();
 
-        RadioButton rb1 = new RadioButton("Cedula");
+        RadioButton rb1 = new RadioButton("Cédula");
         rb1.setToggleGroup(group);
         rb1.setUserData("A");
 
@@ -170,11 +182,11 @@ public class CrearPaciente {
         sp1.setVmax(3);
         sp1.setPrefSize(400, 375);
 
-        Label cedula2 = new Label("Cedula : ");
+        Label cedula2 = new Label("Cédula : ");
         Label nombre2 = new Label("Nombre : ");
         Label apellido2 = new Label("Apellido : ");
-        Label direccion2 = new Label("Direccion : ");
-        Label fechaNacimiento2 = new Label("Fecha de nacimiento : ");
+        Label direccion2 = new Label("Dirección : ");
+        Label fechaNacimiento2 = new Label("Fecha de Nacimiento : ");
         Label estadoCivil2 = new Label("Estado Civil : ");
         Label email2 = new Label("Email : ");
         Label idUsuario2 = new Label("IdUsuario : ");
@@ -347,7 +359,7 @@ public class CrearPaciente {
         TabPane tabPane = new TabPane();
         tabPane.getTabs().addAll(tab1, tab2);
 
-        rootPane.getChildren().addAll(tabPane);
+        rootPane.getChildren().addAll(fondo, tabPane);
         setButtons();
 
     }

@@ -67,9 +67,9 @@ public class SceneOrganizer {
         suministro = new Suministro(conect,login);
         proveedor = new Proveedor(conect);
         centro = new CentroEspecializado(conect,login);
-        crearPaciente=new CrearPaciente(conect);
+        crearPaciente = new CrearPaciente(conect);
         
-        citas=new Citas();
+        citas = new Citas();
         
         
         servicios = new Servicios();
@@ -137,6 +137,13 @@ public class SceneOrganizer {
             if(!menu.getSelectServicios()){
                 servicios.setState(true);
                 menu.setSelectServicios(true);
+            }
+            if(!menu.getSelectLogin()){
+                scene.setRoot(login.getRootPane());
+                login.seteo();
+                login.setState(true);
+                menu.setSelectLogin(true);
+
             }
             if(usuario.getState()){
                 scene.setRoot(usuario.getRootPane());

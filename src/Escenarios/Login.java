@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,7 +42,7 @@ public class Login {
     Label textnombre;
     TextField tf_nombre;
     Label textclave;
-    TextField tf_clave;
+    PasswordField tf_clave;
     Button login;
     Button exit;
     HBox hbox_usuario;
@@ -62,7 +63,7 @@ public class Login {
         mensaje.setFill(Color.RED);
 
         fondo = new ImageView();
-        fondo.setImage(new Image("Img/fondo3.png"));
+        fondo.setImage(new Image("Img/fondo4.png"));
         fondo.setFitWidth(Settings.SCENE_WIDTH + 20);
         fondo.setFitHeight(Settings.SCENE_HEIGHT + 130);
         rootPane.getChildren().add(fondo);
@@ -70,26 +71,27 @@ public class Login {
         lista = new VBox();
         textnombre = new Label();
         tf_nombre = new TextField();
+        
         textclave = new Label();
-        tf_clave = new TextField();
+        tf_clave = new PasswordField();
 
         login = new Button("Login");
         Image imageLog = new Image(getClass().getResourceAsStream("/Img/log.png"));
         login.setGraphic(new ImageView(imageLog));
         
         exit = new Button("Exit");
-        Image imageExit = new Image(getClass().getResourceAsStream("/Img/exit.gif"));
+        Image imageExit = new Image(getClass().getResourceAsStream("/Img/exit.png"));
         exit.setGraphic(new ImageView(imageExit));
 
         hbox_usuario = new HBox();
         hbox_usuario.getChildren().addAll(textnombre, tf_nombre);
         hbox_usuario.setAlignment(Pos.CENTER);
-        hbox_usuario.setSpacing(25);
+        hbox_usuario.setSpacing(45);
         
         hbox_clave = new HBox();
         hbox_clave.getChildren().addAll(textclave, tf_clave);
         hbox_clave.setAlignment(Pos.CENTER);
-        hbox_clave.setSpacing(40);
+        hbox_clave.setSpacing(20);
                 
         seteo();
         
@@ -101,7 +103,7 @@ public class Login {
         
         lista.getChildren().addAll(hbox_usuario, hbox_clave, contenedor, mensaje);
         lista.setAlignment(Pos.CENTER);
-        lista.setSpacing(15);
+        lista.setSpacing(20);
         
         rootPane.getChildren().addAll(lista);
         metOnClick();
@@ -113,12 +115,14 @@ public class Login {
         textnombre.setTextFill(Color.BLACK);
 
         tf_nombre.setPromptText("Ingrese su usuario");
-
-        textclave.setText("Clave: ");
+        tf_nombre.clear();
+        
+        textclave.setText("Contraseña: ");
         textclave.setFont(Font.font("Cambria", FontWeight.BOLD, 15.0));
         textclave.setTextFill(Color.BLACK);
 
         tf_clave.setPromptText("Ingrese su contraseña");
+        tf_clave.clear();
     }
 
     public StackPane getRootPane() {

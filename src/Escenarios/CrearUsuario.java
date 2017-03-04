@@ -5,6 +5,7 @@
  */
 package Escenarios;
 
+import Constantes.Settings;
 import Recursos.ConexionSQL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -48,10 +51,17 @@ StackPane rootPane;
     Button save;
     Button cancel;
     
+    ImageView fondo;
+    
     public CrearUsuario(ConexionSQL conect) {
         this.conect = conect;
         
         this.rootPane = new StackPane();
+        
+        fondo = new ImageView();
+        fondo.setImage(new Image("Img/fondo2.jpg"));
+        fondo.setFitWidth(Settings.SCENE_WIDTH + 20);
+        fondo.setFitHeight(Settings.SCENE_HEIGHT + 130);
         
         Label lb_idUsuario = new Label("idUsuario : ");
         Label lb_nombre = new Label("Nombre : ");
@@ -131,7 +141,7 @@ StackPane rootPane;
         datosUsuario.setAlignment(Pos.CENTER);
         datosUsuario.setSpacing(15);
         
-        rootPane.getChildren().addAll(datosUsuario);
+        rootPane.getChildren().addAll(fondo, datosUsuario);
         rootPane.setPrefSize(800, 400);
         rootPane.setAlignment(Pos.CENTER);
         

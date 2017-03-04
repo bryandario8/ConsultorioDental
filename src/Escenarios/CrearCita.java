@@ -5,6 +5,7 @@
  */
 package Escenarios;
 
+import Constantes.Settings;
 import Recursos.CitaData;
 import Recursos.ConexionSQL;
 import Recursos.DataPaciente;
@@ -36,6 +37,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -74,6 +77,8 @@ public class CrearCita {
     Button check;
     Button back;
 
+    ImageView fondo;
+    
     TextArea detalle;
 
     private Login login;
@@ -81,6 +86,12 @@ public class CrearCita {
     public CrearCita(ConexionSQL conect) {
         this.conect = conect;
         this.rootPane = new StackPane();
+        
+        fondo = new ImageView();
+        fondo.setImage(new Image("Img/fondo2.jpg"));
+        fondo.setFitWidth(Settings.SCENE_WIDTH + 20);
+        fondo.setFitHeight(Settings.SCENE_HEIGHT + 130);
+        
         ToggleGroup group = new ToggleGroup();
 
         RadioButton rb1 = new RadioButton("Cedula");
@@ -247,7 +258,7 @@ public class CrearCita {
         separator1.setOrientation(Orientation.VERTICAL);
         contenedor2.getChildren().addAll(contenedorTablas, separator1, info);
         contenedorGeneral.getChildren().addAll(contenedor1, new Separator(), contenedor2);
-        rootPane.getChildren().addAll(contenedorGeneral);
+        rootPane.getChildren().addAll(fondo, contenedorGeneral);
         setButtons();
     }
 

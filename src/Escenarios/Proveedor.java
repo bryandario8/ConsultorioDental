@@ -5,6 +5,7 @@
  */
 package Escenarios;
 
+import Constantes.Settings;
 import Recursos.ConexionSQL;
 import Recursos.Person;
 import java.sql.PreparedStatement;
@@ -33,6 +34,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -60,6 +63,7 @@ public class Proveedor {
     ConexionSQL conect;
     VBox info;
     Button ingresar;
+    ImageView fondo;
     
     TextField dataRuc;
     TextField dataNombre;
@@ -78,6 +82,11 @@ public class Proveedor {
         this.conect = conect;
         //this.personTemp=persona;
         this.rootPane = new StackPane();
+        
+        fondo = new ImageView();
+        fondo.setImage(new Image("Img/fondo2.jpg"));
+        fondo.setFitWidth(Settings.SCENE_WIDTH + 20);
+        fondo.setFitHeight(Settings.SCENE_HEIGHT + 130);
        
         ToggleGroup group = new ToggleGroup();
 
@@ -196,7 +205,8 @@ public class Proveedor {
         HBox contenedor2 = new HBox();
         contenedor2.getChildren().addAll(sp, info);
         contenedorGeneral.getChildren().addAll(contenedor1, contenedor2);
-        rootPane.getChildren().addAll(contenedorGeneral);
+        rootPane.getChildren().addAll(fondo, contenedorGeneral);
+        
         setButtons();
         info.setVisible(false);
 

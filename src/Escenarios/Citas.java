@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -32,7 +33,7 @@ public class Citas {
     Button enCita;
     Button noSe;
     Button back;
-    HBox botones1;
+    VBox botones1;
     Boolean exit = false;
     ImageView fondo;
     String cargo;
@@ -41,20 +42,27 @@ public class Citas {
         this.rootPane = new StackPane();
 
         fondo = new ImageView();
-        fondo.setImage(new Image("Img/fondo.jpg"));
+        fondo.setImage(new Image("Img/fondo4.png"));
         fondo.setFitWidth(Settings.SCENE_WIDTH + 20);
-        fondo.setFitHeight(Settings.SCENE_HEIGHT + 20);
+        fondo.setFitHeight(Settings.SCENE_HEIGHT + 130);
         rootPane.getChildren().add(fondo);
 
         this.crearCita = new Button("Crear cita");
-        this.enCita = new Button(" En Cita ");
-        this.noSe = new Button("no se");
-        this.back=new Button ("Back");
+        crearCita.setPrefSize(100, 30);
         
-        this.botones1 = new HBox();
-        this.botones1.getChildren().addAll(this.crearCita, this.enCita, this.noSe,this.back);
+        this.enCita = new Button(" En Cita ");
+        enCita.setPrefSize(100, 30);
+        
+        this.noSe = new Button(" ");
+        noSe.setPrefSize(100, 30);
+        
+        this.back = new Button ("Back");
+        back.setPrefSize(100, 30);
+        
+        this.botones1 = new VBox();
+        this.botones1.getChildren().addAll(this.crearCita, this.enCita, this.noSe, this.back);
         this.botones1.setAlignment(Pos.CENTER);
-        this.botones1.setSpacing(80);
+        this.botones1.setSpacing(20);
 
         this.rootPane.getChildren().addAll(this.botones1);
         setupButton();

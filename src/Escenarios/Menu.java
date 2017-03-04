@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -22,6 +23,7 @@ import javafx.scene.layout.StackPane;
 public class Menu {
 
     Boolean state = false;
+    Boolean selectLogin = true;
     Boolean selectPacientes = true;
     Boolean selectCita = true;
     Boolean selectServicios = true;
@@ -33,7 +35,7 @@ public class Menu {
     Button servicios;
     Button usuarios;
     Button back;
-    HBox botones1;
+    VBox botones1;
     Boolean exit = false;
     ImageView fondo;
     String cargo;
@@ -42,21 +44,26 @@ public class Menu {
         this.rootPane = new StackPane();
 
         fondo = new ImageView();
-        fondo.setImage(new Image("Img/fondo.jpg"));
+        fondo.setImage(new Image("Img/fondo4.png"));
         fondo.setFitWidth(Settings.SCENE_WIDTH + 20);
-        fondo.setFitHeight(Settings.SCENE_HEIGHT + 20);
+        fondo.setFitHeight(Settings.SCENE_HEIGHT + 130);
         rootPane.getChildren().add(fondo);
 
         this.pacientes = new Button("Pacientes");
-        this.cita = new Button(" Cita ");
+        pacientes.setPrefSize(100, 30);
+        this.cita = new Button("Cita");
+        cita.setPrefSize(100, 30);
         this.servicios = new Button("Servicios");
+        servicios.setPrefSize(100, 30);
         this.usuarios = new Button("Usuarios");
-        this.back=new Button ("Back");
+        usuarios.setPrefSize(100, 30);
+        this.back = new Button ("Logout");
+        back.setPrefSize(100, 30);
         
-        this.botones1 = new HBox();
-        this.botones1.getChildren().addAll(this.pacientes, this.cita, this.servicios, usuarios,back);
+        this.botones1 = new VBox();
+        this.botones1.getChildren().addAll(this.pacientes, this.cita, this.servicios, this.usuarios, this.back);
         this.botones1.setAlignment(Pos.CENTER);
-        this.botones1.setSpacing(80);
+        this.botones1.setSpacing(20);
 
         this.rootPane.getChildren().addAll(this.botones1);
         setupButton();
@@ -76,7 +83,7 @@ public class Menu {
             this.selectUsuarios = false;
         });
         back.setOnAction(e -> {
-            this.selectBack = false;
+            this.selectLogin = false;
         });
 
     }
@@ -144,27 +151,35 @@ public class Menu {
     public void setSelectBack(Boolean selectBack) {
         this.selectBack = selectBack;
     }
-    
 
+    public Boolean getSelectLogin() {
+        return selectLogin;
+    }
+
+    public void setSelectLogin(Boolean selectLogin) {
+        this.selectLogin = selectLogin;
+    }
+
+    
     public void actualizaarScene() {
         switch (this.cargo) {
             case "Administrador":
-                System.out.println("Ingreso un administrador");
+                System.out.println("Ingresó un administrador");
                 this.botones1.getChildren().clear();
                 this.botones1.getChildren().addAll(this.pacientes, this.cita, this.servicios, usuarios,back);
                 break;
             case "Profesional":
-                System.out.println("Ingreso un administrador");
+                System.out.println("Ingresó un profesional");
                 this.botones1.getChildren().clear();
                 this.botones1.getChildren().addAll(this.pacientes, this.cita, this.servicios,back);
                 break;
             case "Asistente":
-                System.out.println("Ingreso un administrador");
+                System.out.println("Ingresó un asistente");
                 this.botones1.getChildren().clear();
                 this.botones1.getChildren().addAll(this.cita, this.servicios,back);
                 break;
             default:
-                System.out.println("Ahora no joven");
+                System.out.println("Acceso denegado");
                 break;
         }
     }

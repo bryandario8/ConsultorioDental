@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -28,7 +29,7 @@ Boolean state = false;
     Button Proveedor;
     Button CentroEspecializado;
     Button back;
-    HBox botones1;
+    VBox botones1;
     Boolean exit = false;
     ImageView fondo;
     String cargo;
@@ -37,20 +38,27 @@ Boolean state = false;
         this.rootPane = new StackPane();
 
         fondo = new ImageView();
-        fondo.setImage(new Image("Img/fondo.jpg"));
+        fondo.setImage(new Image("Img/fondo4.png"));
         fondo.setFitWidth(Settings.SCENE_WIDTH + 20);
-        fondo.setFitHeight(Settings.SCENE_HEIGHT + 20);
+        fondo.setFitHeight(Settings.SCENE_HEIGHT + 130);
         rootPane.getChildren().add(fondo);
 
-        this.Suministros = new Button(" Suministros ");
-        this.Proveedor = new Button(" Proveedor ");
-        this.CentroEspecializado = new Button("Centro Especializado");
-        this.back=new Button ("Back");
+        this.Suministros = new Button("Suministros");
+        Suministros.setPrefSize(130, 30);
         
-        this.botones1 = new HBox();
+        this.Proveedor = new Button("Proveedor");
+        Proveedor.setPrefSize(130, 30);
+        
+        this.CentroEspecializado = new Button("Centro Especializado");
+        CentroEspecializado.setPrefSize(130, 30);
+        
+        this.back = new Button ("Back");
+        back.setPrefSize(130, 30);
+        
+        this.botones1 = new VBox();
         this.botones1.getChildren().addAll(this.Suministros, this.Proveedor, this.CentroEspecializado,this.back);
         this.botones1.setAlignment(Pos.CENTER);
-        this.botones1.setSpacing(80);
+        this.botones1.setSpacing(20);
 
         this.rootPane.getChildren().addAll(this.botones1);
         setupButton();
