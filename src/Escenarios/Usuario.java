@@ -15,6 +15,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -91,10 +92,21 @@ public class Usuario {
 
         tf_search = new TextField("");
 
-        search = new Button("Mostrar");
+        search = new Button("Search");
+        Image imageSearch = new Image(getClass().getResourceAsStream("/Img/search.png"));
+        search.setGraphic(new ImageView(imageSearch));
+        
+        plus = new Button("Add");
+        Image imagePlus = new Image(getClass().getResourceAsStream("/Img/user.png"));
+        plus.setGraphic(new ImageView(imagePlus));
+        
+        modif = new Button("Edit");
+        Image imageEdit = new Image(getClass().getResourceAsStream("/Img/edit.png"));
+        modif.setGraphic(new ImageView(imageEdit));
+        
         back = new Button("Back");
-        plus = new Button("+");
-        modif = new Button("Modificar");
+        Image imageBack = new Image(getClass().getResourceAsStream("/Img/back.gif"));
+        back.setGraphic(new ImageView(imageBack));
 
         HBox contenedor1 = new HBox();
 
@@ -165,25 +177,25 @@ public class Usuario {
         sp1.setVmax(3);
         sp1.setPrefSize(400, 375);
 
-        Label lb_idUsuario = new Label("idUsuario : ");
-        Label lb_nombre = new Label("Nombre : ");
-        Label lb_apellido = new Label("Apellido : ");
-        Label lb_direccion = new Label("Direccion : ");
-        Label lb_email = new Label("Email : ");
-        Label lb_profesion = new Label("Profesion : ");
-        Label lb_cargo = new Label("Cargo : ");
-        Label lb_consultorio = new Label("Consultorio : ");
-        Label lb_idUsuario2 = new Label("idUsuario2 : ");
+        Label lb_idUsuario = new Label("idUsuario: ");
+        Label lb_nombre = new Label("Nombre: ");
+        Label lb_apellido = new Label("Apellido: ");
+        Label lb_direccion = new Label("Dirección: ");
+        Label lb_email = new Label("Email: ");
+        Label lb_profesion = new Label("Profesión: ");
+        Label lb_cargo = new Label("Cargo: ");
+        Label lb_consultorio = new Label("Consultorio: ");
+        Label lb_idUsuario2 = new Label("idJefe: ");
 
-        lb_idUsuario.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_nombre.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_apellido.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_direccion.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_email.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_profesion.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_cargo.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_consultorio.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_idUsuario2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        lb_idUsuario.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_nombre.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_apellido.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_direccion.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_email.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_profesion.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_cargo.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_consultorio.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_idUsuario2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
 
         Label res_idUsuario = new Label();
         Label res_nombre = new Label();
@@ -218,10 +230,13 @@ public class Usuario {
         info1 = new VBox();
         info1.getChildren().addAll(new Separator(), hBoxIdUsuario, hBoxNombre, hBoxApellido, hBoxDireccion, hBoxEmail,
                 hBoxProfesion, hBoxCargo, hBoxConsultorio, hBoxIdUsuario2, new Separator());
+        info1.setSpacing(1);
+        info1.setPadding(new Insets(10, 10, 10, 10));
 
         info = new VBox();
 
         info.getChildren().addAll(info1, sp1);
+        info.setPadding(new Insets(5, 10, 5, 10));
 
         info1.setVisible(false);
         table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Usuarios>() {
@@ -249,25 +264,25 @@ public class Usuario {
             }
         });
 
-        Label lb_idUsuario1 = new Label("idUsuario : ");
-        Label lb_nombre1 = new Label("Nombre : ");
-        Label lb_apellido1 = new Label("Apellido : ");
-        Label lb_direccion1 = new Label("Direccion : ");
-        Label lb_email1 = new Label("Email : ");
-        Label lb_profesion1 = new Label("Profesion : ");
-        Label lb_cargo1 = new Label("Cargo : ");
-        Label lb_consultorio1 = new Label("Consultorio : ");
-        Label lb_idUsuario21 = new Label("idUsuario2 : ");
+        Label lb_idUsuario1 = new Label("idUsuario: ");
+        Label lb_nombre1 = new Label("Nombre: ");
+        Label lb_apellido1 = new Label("Apellido: ");
+        Label lb_direccion1 = new Label("Dirección: ");
+        Label lb_email1 = new Label("Email: ");
+        Label lb_profesion1 = new Label("Profesión: ");
+        Label lb_cargo1 = new Label("Cargo: ");
+        Label lb_consultorio1 = new Label("Consultorio: ");
+        Label lb_idUsuario21 = new Label("idJefe: ");
 
-        lb_idUsuario1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_nombre1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_apellido1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_direccion1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_email1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_profesion1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_cargo1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_consultorio1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        lb_idUsuario21.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        lb_idUsuario1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_nombre1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_apellido1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_direccion1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_email1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_profesion1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_cargo1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_consultorio1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        lb_idUsuario21.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
 
         tf_consultorios = new ComboBox();
         llenarComboBoxConsultorios();
@@ -303,7 +318,7 @@ public class Usuario {
         hBoxConsultorio1.getChildren().addAll(lb_consultorio1, tf_consultorios);
         hBoxIdUsuario21.getChildren().addAll(lb_idUsuario21, dataIdUsuario2);
 
-        hBoxIdUsuario1.setAlignment(Pos.CENTER);
+        /*hBoxIdUsuario1.setAlignment(Pos.CENTER);
         hBoxNombre1.setAlignment(Pos.CENTER);
         hBoxApellido1.setAlignment(Pos.CENTER);
         hBoxDireccion1.setAlignment(Pos.CENTER);
@@ -311,24 +326,35 @@ public class Usuario {
         hBoxProfesion1.setAlignment(Pos.CENTER);
         hBoxCargo1.setAlignment(Pos.CENTER);
         hBoxConsultorio1.setAlignment(Pos.CENTER);
-        hBoxIdUsuario21.setAlignment(Pos.CENTER);
+        hBoxIdUsuario21.setAlignment(Pos.CENTER);*/
 
-        clear = new Button("Limpiar");
-        save = new Button("Guardar");
-        cancel = new Button("Cancelar");
+        clear = new Button("Clear");
+        Image imageClear = new Image(getClass().getResourceAsStream("/Img/clear.png"));
+        clear.setGraphic(new ImageView(imageClear));
+        
+        save = new Button("Save");
+        Image imageSave = new Image(getClass().getResourceAsStream("/Img/save.png"));
+        save.setGraphic(new ImageView(imageSave));
+        
+        cancel = new Button("Cancel");
+        Image imageCancel = new Image(getClass().getResourceAsStream("/Img/cancel.gif"));
+        cancel.setGraphic(new ImageView(imageCancel));
 
         HBox hBoxButtons = new HBox();
         hBoxButtons.getChildren().addAll(clear, save, cancel);
         hBoxButtons.setAlignment(Pos.CENTER);
+        hBoxButtons.setPadding(new Insets(10, 10, 10, 10));
+        hBoxButtons.setSpacing(40);
 
         datosUsuario = new VBox();
         datosUsuario.getChildren().addAll(hBoxIdUsuario1, hBoxNombre1, hBoxApellido1,
                 hBoxDireccion1, hBoxEmail1, hBoxProfesion1, hBoxCargo1, hBoxConsultorio1, hBoxIdUsuario21, hBoxButtons);
-        datosUsuario.setAlignment(Pos.CENTER);
         datosUsuario.setVisible(false);
+        datosUsuario.setSpacing(1);
+        datosUsuario.setPadding(new Insets(5, 10, 5, 10));
         sp1.setContent(datosUsuario);
 
-        contenedor1.getChildren().addAll(search, back, plus, modif);
+        contenedor1.getChildren().addAll(search, plus, modif, back);
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
         contenedor2.getChildren().addAll(sp, info);

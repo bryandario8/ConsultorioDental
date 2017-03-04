@@ -349,7 +349,7 @@ public class CrearPaciente {
         info1.setVisible(false);
 
         HBox contenedor1 = new HBox();
-        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, back, plus, modif);
+        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, plus, modif, back);
         contenedor1.setSpacing(38);
 
         HBox contenedor2 = new HBox();
