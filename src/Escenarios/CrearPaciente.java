@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Escenarios;
 
 import Constantes.Settings;
@@ -12,17 +7,12 @@ import Recursos.ConexionSQL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -35,7 +25,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -95,8 +84,8 @@ public class CrearPaciente {
     ComboBox cB_idConsultorio;
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    Boolean state=false;
-    Boolean selectBack=true;
+    Boolean state = false;
+    Boolean selectBack = true;
     
     public CrearPaciente(ConexionSQL conect) {
         this.conect = conect;
@@ -111,12 +100,32 @@ public class CrearPaciente {
 
         tf_search = new TextField();
         search = new Button("Search");
-        plus = new Button("+");
-        modif = new Button("Modificar");
+        Image imageSearch = new Image(getClass().getResourceAsStream("/Img/search.png"));
+        search.setGraphic(new ImageView(imageSearch));
+        
+        plus = new Button("Add");
+        Image imagePlus = new Image(getClass().getResourceAsStream("/Img/user.png"));
+        plus.setGraphic(new ImageView(imagePlus));
+        
+        modif = new Button("Edit");
+        Image imageEdit = new Image(getClass().getResourceAsStream("/Img/edit.png"));
+        modif.setGraphic(new ImageView(imageEdit));
+        
         back = new Button("Back");
-        clear = new Button("Limpiar");
-        ingresar = new Button("Guardar");
-        cancel = new Button("Cancelar");
+        Image imageBack = new Image(getClass().getResourceAsStream("/Img/back.gif"));
+        back.setGraphic(new ImageView(imageBack));
+        
+        clear = new Button("Clear");
+        Image imageClear = new Image(getClass().getResourceAsStream("/Img/clear.png"));
+        clear.setGraphic(new ImageView(imageClear));
+        
+        ingresar = new Button("Save");
+        Image imageSave = new Image(getClass().getResourceAsStream("/Img/save.png"));
+        ingresar.setGraphic(new ImageView(imageSave));
+        
+        cancel = new Button("Cancel");
+        Image imageCancel = new Image(getClass().getResourceAsStream("/Img/cancel.gif"));
+        cancel.setGraphic(new ImageView(imageCancel));
 
         ToggleGroup group = new ToggleGroup();
 
@@ -146,10 +155,10 @@ public class CrearPaciente {
         contenedorRadio.getChildren().add(rb1);
         contenedorRadio.getChildren().add(rb2);
         contenedorRadio.getChildren().add(rb3);
-        contenedorRadio.setSpacing(10);
+        contenedorRadio.setSpacing(12);
 
-        Label label = new Label("Paciente");
-        label.setFont(new Font("Arial", 20));
+        Label label = new Label("PACIENTE");
+        label.setFont(Font.font("Cambria", FontWeight.BOLD, 15.0));
 
         table.setEditable(false);
 
@@ -182,25 +191,25 @@ public class CrearPaciente {
         sp1.setVmax(3);
         sp1.setPrefSize(400, 375);
 
-        Label cedula2 = new Label("Cédula : ");
-        Label nombre2 = new Label("Nombre : ");
-        Label apellido2 = new Label("Apellido : ");
-        Label direccion2 = new Label("Dirección : ");
-        Label fechaNacimiento2 = new Label("Fecha de Nacimiento : ");
-        Label estadoCivil2 = new Label("Estado Civil : ");
-        Label email2 = new Label("Email : ");
-        Label idUsuario2 = new Label("IdUsuario : ");
-        Label idConsultorio2 = new Label("IdConsultorio : ");
+        Label cedula2 = new Label("Cédula: ");
+        Label nombre2 = new Label("Nombre: ");
+        Label apellido2 = new Label("Apellido: ");
+        Label direccion2 = new Label("Dirección: ");
+        Label fechaNacimiento2 = new Label("Fecha de Nacimiento: ");
+        Label estadoCivil2 = new Label("Estado Civil: ");
+        Label email2 = new Label("Email: ");
+        Label idUsuario2 = new Label("IdUsuario: ");
+        Label idConsultorio2 = new Label("IdConsultorio: ");
 
-        cedula2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        nombre2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        apellido2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        direccion2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        fechaNacimiento2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        estadoCivil2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        email2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        idUsuario2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        idConsultorio2.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        cedula2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        nombre2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        apellido2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        direccion2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        fechaNacimiento2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        estadoCivil2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        email2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        idUsuario2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        idConsultorio2.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
 
         Label res_cedula1 = new Label();
         Label res_nombre1 = new Label();
@@ -235,7 +244,8 @@ public class CrearPaciente {
         VBox info2 = new VBox();
         info2.getChildren().addAll(new Separator(), hBoxCedula1, hBoxNombre1, hBoxApellido1, hBoxDireccion1,
                 hBoxFechaNacimiento1, hBoxEstadoCivil1, hBoxEmail1, hBoxIdUsuario1, hBoxIdConsultorio1, new Separator());
-
+        info2.setPadding(new Insets(5, 10, 5, 10));
+        
         info = new VBox();
         info.getChildren().addAll(info2, sp1);
 
@@ -266,25 +276,25 @@ public class CrearPaciente {
             }
         });
 
-        Label cedula1 = new Label("Cedula : ");
-        Label nombre1 = new Label("Nombre : ");
-        Label apellido1 = new Label("Apellido : ");
-        Label direccion1 = new Label("Direccion : ");
-        Label fechaNacimiento1 = new Label("Fecha de nacimiento : ");
-        Label estadoCivil1 = new Label("Estado Civil : ");
-        Label email1 = new Label("Email : ");
-        Label idUsuario1 = new Label("IdUsuario : ");
-        Label idConsultorio1 = new Label("IdConsultorio : ");
+        Label cedula1 = new Label("Cédula: ");
+        Label nombre1 = new Label("Nombre: ");
+        Label apellido1 = new Label("Apellido: ");
+        Label direccion1 = new Label("Dirección: ");
+        Label fechaNacimiento1 = new Label("Fecha de Nacimiento: ");
+        Label estadoCivil1 = new Label("Estado Civil: ");
+        Label email1 = new Label("Email: ");
+        Label idUsuario1 = new Label("IdUsuario: ");
+        Label idConsultorio1 = new Label("IdConsultorio: ");
 
-        cedula1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        nombre1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        apellido1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        direccion1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        fechaNacimiento1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        estadoCivil1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        email1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        idUsuario1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        idConsultorio1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        cedula1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        nombre1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        apellido1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        direccion1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        fechaNacimiento1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        estadoCivil1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        email1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        idUsuario1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        idConsultorio1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
 
         dataCedula = new TextField();
         dataNombre = new TextField();
@@ -328,15 +338,19 @@ public class CrearPaciente {
         HBox hBoxButtons = new HBox();
         hBoxButtons.getChildren().addAll(clear, ingresar, cancel);
         hBoxButtons.setAlignment(Pos.CENTER);
+        hBoxButtons.setSpacing(40);
 
         info1 = new VBox();
         info1.getChildren().addAll(new Separator(), hBoxCedula, hBoxNombre, hBoxApellido, hBoxDireccion, hBoxFechaNacimiento, hBoxEstadoCivil, hBoxEmail, hBoxIdUsuario, hBoxIdConsultorio, new Separator(), hBoxButtons);
+        info1.setSpacing(1);
+        info1.setPadding(new Insets(10, 10, 10, 10));
 
         sp1.setContent(info1);
         info1.setVisible(false);
 
         HBox contenedor1 = new HBox();
         contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, back, plus, modif);
+        contenedor1.setSpacing(38);
 
         HBox contenedor2 = new HBox();
         contenedor2.getChildren().addAll(sp, info);
@@ -349,8 +363,8 @@ public class CrearPaciente {
         tab1.setClosable(false);
         tab1.setContent(contenedorGeneral);
 
-        Label label1 = new Label("Historial clinico");
-        label1.setFont(new Font("Arial", 20));
+        Label label1 = new Label("HISTORIAL CLÍNICO");
+        label1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
 
         Tab tab2 = new Tab();
         tab2.setGraphic(label1);
@@ -406,7 +420,7 @@ public class CrearPaciente {
             pacienteTemp = null;
             switch (this.option) {
                 case "":
-                    System.out.println("ingrese algo");
+                    System.out.println("Ingrese algo");
                     break;
                 case "A":
                     System.out.println("opcion A");
