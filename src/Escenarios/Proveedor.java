@@ -47,9 +47,9 @@ import javafx.scene.text.FontWeight;
  * @author FABKME
  */
 public class Proveedor {
-    Boolean state=false;
-    Boolean selectPlus=true;
-    Boolean selectBack=true;
+    Boolean state = false;
+    Boolean selectPlus = true;
+    Boolean selectBack = true;
     
     StackPane rootPane;
     private TableView<Person> table = new TableView<Person>();
@@ -58,6 +58,7 @@ public class Proveedor {
     Button search;
     Button back;
     Button plus;
+    Button modif;
     String option = "";
     TextField tf_search;
     ConexionSQL conect;
@@ -90,7 +91,7 @@ public class Proveedor {
        
         ToggleGroup group = new ToggleGroup();
 
-        RadioButton rb1 = new RadioButton("Ruc");
+        RadioButton rb1 = new RadioButton("RUC");
         rb1.setToggleGroup(group);
         rb1.setUserData("A");
 
@@ -117,8 +118,20 @@ public class Proveedor {
         tf_search = new TextField("");
 
         search = new Button("Search");
+        Image imageSearch = new Image(getClass().getResourceAsStream("/Img/search.png"));
+        search.setGraphic(new ImageView(imageSearch));
+        
+        plus = new Button("Add");
+        Image imagePlus = new Image(getClass().getResourceAsStream("/Img/user.png"));
+        plus.setGraphic(new ImageView(imagePlus));
+        
+        modif = new Button("Edit");
+        Image imageEdit = new Image(getClass().getResourceAsStream("/Img/edit.png"));
+        modif.setGraphic(new ImageView(imageEdit));
+        
         back = new Button("Back");
-        plus=new Button("+");
+        Image imageBack = new Image(getClass().getResourceAsStream("/Img/back.gif"));
+        back.setGraphic(new ImageView(imageBack));
         
         HBox contenedor1 = new HBox();
 
@@ -164,19 +177,19 @@ public class Proveedor {
        
         
         
-        Label label = new Label("Datos");
-        label.setFont(new Font("Arial", 20));
-        ingresar=new Button ("Ingresar");
-        Label ruc = new Label("RUC : ");
-        ruc.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label nombre = new Label("Nombre : ");
-        nombre.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label direccion = new Label("Direccion : ");
-        direccion.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label telefono = new Label("Telefono : ");
-        telefono.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label email = new Label("Email : ");
-        email.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label label = new Label("DATOS");
+        label.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
+        ingresar = new Button ("Ingresar");
+        Label ruc = new Label("RUC: ");
+        ruc.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label nombre = new Label("Nombre: ");
+        nombre.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label direccion = new Label("Dirección: ");
+        direccion.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label telefono = new Label("Teléfono: ");
+        telefono.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label email = new Label("Email: ");
+        email.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         
         dataRuc = new TextField();
         dataNombre = new TextField();
@@ -200,7 +213,8 @@ public class Proveedor {
         info = new VBox();
         info.getChildren().addAll(info1, sp1);
         
-        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, back,plus);
+        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, plus, modif, back);
+        contenedor1.setSpacing(58);
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
         contenedor2.getChildren().addAll(sp, info);

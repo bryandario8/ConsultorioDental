@@ -58,6 +58,7 @@ StackPane rootPane;
     Button search;
     Button plus;
     Button back;
+    Button modif;
     String option = "";
     TextField tf_search;
     ConexionSQL conect;
@@ -94,7 +95,7 @@ StackPane rootPane;
        
         ToggleGroup group = new ToggleGroup();
 
-        RadioButton rb1 = new RadioButton("Codigo");
+        RadioButton rb1 = new RadioButton("Código");
         rb1.setToggleGroup(group);
         rb1.setUserData("A");
 
@@ -122,8 +123,20 @@ StackPane rootPane;
         tf_search = new TextField("");
 
         search = new Button("Search");
+        Image imageSearch = new Image(getClass().getResourceAsStream("/Img/search.png"));
+        search.setGraphic(new ImageView(imageSearch));
+        
+        plus = new Button("Add");
+        Image imagePlus = new Image(getClass().getResourceAsStream("/Img/user.png"));
+        plus.setGraphic(new ImageView(imagePlus));
+        
+        modif = new Button("Edit");
+        Image imageEdit = new Image(getClass().getResourceAsStream("/Img/edit.png"));
+        modif.setGraphic(new ImageView(imageEdit));
+        
         back = new Button("Back");
-        plus=new Button("+");
+        Image imageBack = new Image(getClass().getResourceAsStream("/Img/back.gif"));
+        back.setGraphic(new ImageView(imageBack));
         
         HBox contenedor1 = new HBox();
 
@@ -163,19 +176,19 @@ StackPane rootPane;
         sp.setContent(table);
         
         
-        Label label = new Label("Datos");
-        label.setFont(new Font("Arial", 20));
+        Label label = new Label("DATOS");
+        label.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
         ingresar=new Button ("Ingresar");
-        Label ruc = new Label("Ruc : ");
-        ruc.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label nombre = new Label("Nombre : ");
-        nombre.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label direccion = new Label("Direccion : ");
-        direccion.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label email = new Label("Email : ");
-        email.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label telefono = new Label("Telefono : ");
-        telefono.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label ruc = new Label("Código: ");
+        ruc.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        Label nombre = new Label("Nombre: ");
+        nombre.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        Label direccion = new Label("Dirección: ");
+        direccion.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        Label email = new Label("Email: ");
+        email.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        Label telefono = new Label("Teléfono: ");
+        telefono.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
 
         dataRuc = new TextField();
         dataNombre = new TextField();
@@ -196,7 +209,9 @@ StackPane rootPane;
 
         info = new VBox();
         info.getChildren().addAll(info1);
-        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, back,plus);
+        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, plus, modif, back);
+        contenedor1.setSpacing(50);
+        
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
         contenedor2.getChildren().addAll(sp, info);
