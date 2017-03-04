@@ -197,6 +197,7 @@ public class SceneOrganizer {
             if(proveedor.getState()){
                 scene.setRoot(proveedor.getRootPane());
                 proveedor.setState(false);
+                proveedor.llenarTabla();
             }
             if(!proveedor.getSelectBack()){
                 servicios.setState(true);

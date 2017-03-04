@@ -69,6 +69,7 @@ public class CrearPaciente {
 
     VBox info;
     VBox info1;
+    VBox info2;
     VBox trata;
     VBox vBoxRecetas;
 
@@ -241,7 +242,7 @@ public class CrearPaciente {
         hBoxIdUsuario1.getChildren().addAll(idUsuario2, res_idUsuario1);
         hBoxIdConsultorio1.getChildren().addAll(idConsultorio2, res_idConsultorio1);
 
-        VBox info2 = new VBox();
+        info2 = new VBox();
         info2.getChildren().addAll(new Separator(), hBoxCedula1, hBoxNombre1, hBoxApellido1, hBoxDireccion1,
                 hBoxFechaNacimiento1, hBoxEstadoCivil1, hBoxEmail1, hBoxIdUsuario1, hBoxIdConsultorio1, new Separator());
         info2.setPadding(new Insets(5, 10, 5, 10));
@@ -392,7 +393,8 @@ public class CrearPaciente {
             info1.setVisible(true);
         });
         this.clear.setOnAction(e -> {
-
+            info1.setVisible(false);
+            info2.setVisible(false);
             clear();
 
         });

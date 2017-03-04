@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 
 public class Person {
+    String ruc;
     String firstName;
     String lastName;
     String direccion;
@@ -21,7 +22,7 @@ public class Person {
     String sexo;
     String email;
     String tipoDeSangre;
-    ArrayList<String> telefonos; 
+    String telefonos; 
     int tipo;
  
     public Person(String fName, String lName, String email) {
@@ -30,11 +31,12 @@ public class Person {
         this.email = new String(email);
     }
     
-    public Person(String Name, String telefono, String email, int tipo ){
-        ArrayList<String> lista= new ArrayList<>();
-        lista.add(telefono);
+    public Person(String ruc, String Name, String direccion, String telefono, String email, int tipo ){
+        
+        this.ruc = ruc;
         this.firstName = Name;
-        this.telefonos = lista;
+        this.direccion = direccion;
+        this.telefonos = telefono;
         this.email = email;
         this.tipo = tipo;
     }
@@ -65,5 +67,74 @@ public class Person {
     public void imprimir(){
         
     }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getTipoDeSangre() {
+        return tipoDeSangre;
+    }
+
+    public void setTipoDeSangre(String tipoDeSangre) {
+        this.tipoDeSangre = tipoDeSangre;
+    }
+
+    public String getTelefonos() {
+        return telefonos;
+    }
+
+    public void setTelefonos(String telefonos) {
+        this.telefonos = telefonos;
+    }
+
+    
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
+    }
+    
+    
+    
  
 }
