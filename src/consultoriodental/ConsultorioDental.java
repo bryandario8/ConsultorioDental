@@ -24,15 +24,16 @@ public class ConsultorioDental extends Application {
     
     private Stage stagePrincipal;
     SceneOrganizer organizer;
-
+    
     @Override
     public void start(Stage stagePrincipal) {
         this.stagePrincipal = stagePrincipal;
         organizer = new SceneOrganizer();
         organizer.getScene().addEventFilter(MouseEvent.MOUSE_PRESSED, new Quit());
         stagePrincipal.setScene(organizer.getScene());
-        stagePrincipal.setTitle("Consultorio Dental");
-        //stagePrincipal.getIcons().add(new Image("file:shark-icon-png-4.png"));
+        stagePrincipal.setTitle("SADCO - Sistema de Administración de Consultorio Odontológico");
+        stagePrincipal.getIcons().add(new Image("/Img/muelita.gif"));
+        stagePrincipal.setResizable(false);
         stagePrincipal.show();
 
     }

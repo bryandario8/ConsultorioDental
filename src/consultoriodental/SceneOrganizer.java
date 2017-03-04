@@ -74,7 +74,7 @@ public class SceneOrganizer {
         
         servicios = new Servicios();
         menu = new Menu();
-        scene = new Scene(login.getRootPane(), 800, 400);
+        scene = new Scene(login.getRootPane(), 800, 500);
         setupTimeline();
     }
 
