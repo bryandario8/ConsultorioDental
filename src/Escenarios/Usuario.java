@@ -56,6 +56,7 @@ public class Usuario {
     TextField tf_search;
     ConexionSQL conect;
     VBox info;
+    VBox info1;
     VBox datosUsuario;
 
     ComboBox tf_consultorios;
@@ -204,7 +205,7 @@ public class Usuario {
         hBoxConsultorio.getChildren().addAll(lb_consultorio, res_consultorio);
         hBoxIdUsuario2.getChildren().addAll(lb_idUsuario2, res_idUsuario2);
 
-        VBox info1 = new VBox();
+        info1 = new VBox();
         info1.getChildren().addAll(new Separator(), hBoxIdUsuario, hBoxNombre, hBoxApellido, hBoxDireccion, hBoxEmail,
                 hBoxProfesion, hBoxCargo, hBoxConsultorio, hBoxIdUsuario2, new Separator());
 
@@ -379,7 +380,10 @@ public class Usuario {
 
         });
         this.back.setOnAction(e -> {
+            info1.setVisible(false);
+            datosUsuario.setVisible(false);
             this.selectBack = false;
+            
         });
         this.plus.setOnAction(e -> {
             clear();

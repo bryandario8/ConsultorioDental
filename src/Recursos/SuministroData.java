@@ -6,28 +6,58 @@
 package Recursos;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author FABKME
  */
 public class SuministroData {
+    String codigo;
     String nombre;
     Integer cantidad;
     Date fechaVencimiento;
     Date fechaRegistro;
     String idProveedor;
+    String idUsuario;
+    String idConsultorio;
     
     
  
-    public SuministroData(String nombre, int cantidad, Date fechaVencimiento) {
+    public SuministroData(String codigo, String nombre, Integer cantidad, Date fechaVencimiento) {
+        this.codigo = codigo;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.fechaVencimiento = fechaVencimiento;
         
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getIdConsultorio() {
+        return idConsultorio;
+    }
+
+    public void setIdConsultorio(String idConsultorio) {
+        this.idConsultorio = idConsultorio;
+    }
+
+    
+    
     public String getName() {
         return nombre;
     }
@@ -36,7 +66,7 @@ public class SuministroData {
         this.nombre = name;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 

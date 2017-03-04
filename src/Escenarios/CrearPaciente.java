@@ -426,7 +426,7 @@ public class CrearPaciente {
                     } else {
                         try {
                             ResultSet rs = this.conect.getSta().executeQuery("select * from paciente where nombre like "
-                                    + "'%" + this.tf_search.textProperty().get() + "%'" + ";");
+                                    + "'" + this.tf_search.textProperty().get() + "%'" + ";");
                             int size = 0;
                             while (rs.next()) {
                                 pacienteTemp = new DataPaciente(rs.getString("cedula"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("direccion"),
@@ -454,7 +454,7 @@ public class CrearPaciente {
                     } else {
                         try {
                             ResultSet rs = this.conect.getSta().executeQuery("select * from paciente where apellido like "
-                                    + "'%" + this.tf_search.textProperty().get() + "%'" + ";");
+                                    + "'" + this.tf_search.textProperty().get() + "%'" + ";");
 
                             while (rs.next()) {
                                 pacienteTemp = new DataPaciente(rs.getString("cedula"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("direccion"),

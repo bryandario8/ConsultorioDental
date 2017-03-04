@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
@@ -73,10 +73,18 @@ public class Suministro {
     Button search;
     Button back;
     Button plus;
+    Button modif;
+    Button clear;
+    Button save;
+    Button cancel;
+    
+    
     String option = "";
     TextField tf_search;
     ConexionSQL conect;
     VBox info;
+    VBox info1;
+    VBox info2;
     Button ingresar;
     
     
@@ -134,6 +142,10 @@ this.conect = conect;
         search = new Button("Search");
         back = new Button("Back");
         plus=new Button("+");
+        modif = new Button("Modificar");
+        clear = new Button(" Clear ");
+        save = new Button(" Save ");
+        cancel = new Button(" Cancel ");
         
         HBox contenedor1 = new HBox();
 
@@ -159,33 +171,27 @@ this.conect = conect;
 
         table.getColumns().addAll(nameCol, cantidadCol, fechaCol);
 
-        table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SuministroData>() {
-
-            @Override
-            public void changed(ObservableValue<? extends SuministroData> observable, SuministroData oldValue, SuministroData newValue) {
-                System.out.println(newValue.getName());
-                sumin = newValue;
-                info.setVisible(true);
-            }
-        });
-
-        final ScrollPane sp = new ScrollPane();
-        sp.setVmax(3);
-        sp.setPrefSize(400, 375);
-        sp.setContent(table);
-
-        /*final ScrollPane sp1 = new ScrollPane();
-        sp1.setVmax(3);
-        sp1.setPrefSize(400, 375);*/
-
-       
-        
-        
         Label label = new Label("Datos");
         label.setFont(new Font("Arial", 20));
         ingresar=new Button ("Ingresar");
-        Label codigo = new Label("Codigo : ");
-        codigo.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label codigo1 = new Label("Codigo : ");
+        codigo1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label nombre1 = new Label("Nombre : ");
+        nombre1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label cantidad1 = new Label("Cantidad : ");
+        cantidad1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label fechaVence1= new Label("Fecha de Vencimiento : ");
+        fechaVence1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label fechaRegistro1= new Label("Fecha de Registro : ");
+        fechaRegistro1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label proveedor1 = new Label("Nombre de Proveedor : ");       
+        proveedor1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label usuario1 = new Label("Nombre de Usuario : ");       
+        usuario1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label consultorio1 = new Label("Nombre del Consultorio : ");       
+        consultorio1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        
+        
         Label nombre = new Label("Nombre : ");
         nombre.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         Label cantidad = new Label("Cantidad : ");
@@ -196,6 +202,84 @@ this.conect = conect;
         proveedor.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         Label consultorio = new Label("Nombre del Consultorio : ");       
         consultorio.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        
+        
+        
+        
+        Label res_idsuministro1 = new Label();
+        Label res_nombre1 = new Label();
+        Label res_cantidad1 = new Label();
+        Label res_fechaVencimiento1 = new Label();
+        Label res_fechaRegistro1 = new Label();
+        Label res_idproveedor1 = new Label();
+        Label res_idUsuario1 = new Label();
+        Label res_idConsultorio1 = new Label();
+
+        
+        HBox hboxIdSuministro1 = new HBox();
+        HBox hboxNombre1 = new HBox();
+        HBox hboxCantidad1 = new HBox();
+        HBox hboxFechaVence1 = new HBox();
+        HBox hboxFechaRegistro1 = new HBox();
+        HBox hboxIdProveedor1 = new HBox();
+        HBox hboxIdUsuario1 = new HBox();
+        HBox hboxIdConsultorio1 = new HBox();
+        
+        HBox hboxNombre = new HBox();
+        HBox hboxCantidad = new HBox();
+        HBox hboxFechaVence = new HBox();
+        HBox hboxIdProveedor = new HBox();
+        HBox hboxIdConsultorio = new HBox();
+        
+        hboxIdSuministro1.getChildren().addAll(codigo1,res_idsuministro1);
+        hboxNombre1.getChildren().addAll(nombre1, res_nombre1);
+        hboxCantidad1.getChildren().addAll(cantidad1, res_cantidad1);
+        hboxFechaVence1.getChildren().addAll(fechaVence1, res_fechaVencimiento1);
+        hboxFechaRegistro1.getChildren().addAll(fechaRegistro1, res_fechaRegistro1);
+        hboxIdProveedor1.getChildren().addAll(proveedor1, res_idproveedor1);
+        hboxIdUsuario1.getChildren().addAll(usuario1, res_idUsuario1);
+        hboxIdConsultorio1.getChildren().addAll(consultorio1, res_idConsultorio1);
+        
+        
+        
+        
+        table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SuministroData>() {
+
+            @Override
+            public void changed(ObservableValue<? extends SuministroData> observable, SuministroData oldValue, SuministroData newValue) {
+                //System.out.println(newValue.getName());
+                try{
+                    sumin = newValue;
+                    res_idsuministro1.setText(sumin.getCodigo());
+                    res_nombre1.setText(sumin.getName());
+                    res_cantidad1.setText(sumin.getCantidad().toString());
+                    res_fechaVencimiento1.setText(sumin.getFechaVencimiento().toLocalDate().toString());
+                    res_fechaRegistro1.setText(sumin.getFechaRegistro().toLocalDate().toString());
+                    res_idproveedor1.setText(sumin.getIdProveedor());
+                    res_idUsuario1.setText(sumin.getIdProveedor());
+                    res_idConsultorio1.setText(sumin.getIdConsultorio());
+
+                    info.setVisible(true);
+                }catch(NullPointerException e){
+                
+                }
+                
+                
+                
+            }
+        });
+
+        final ScrollPane sp = new ScrollPane();
+        sp.setVmax(3);
+        sp.setPrefSize(400, 375);
+        sp.setContent(table);
+
+        final ScrollPane sp1 = new ScrollPane();
+        sp1.setVmax(3);
+        sp1.setPrefSize(400, 375);
+       
+        
+        
         
        
         
@@ -215,19 +299,25 @@ this.conect = conect;
         
         
         
-        hBoxCodigo.getChildren().addAll(codigo);
-        hBoxNombre.getChildren().addAll(nombre);
-        hBoxCantidad.getChildren().addAll(cantidad);
-        hBoxFechaVence.getChildren().addAll(fechaVence);
-        hBoxProveedor.getChildren().addAll(proveedor);  // nombre del proveedor
-        hBoxConsultorio.getChildren().addAll(consultorio);
+        hboxNombre.getChildren().addAll(nombre);
+        hboxCantidad.getChildren().addAll(cantidad);
+        hboxFechaVence.getChildren().addAll(fechaVence);
+        hboxIdProveedor.getChildren().addAll(proveedor);  // nombre del proveedor
+        hboxIdConsultorio.getChildren().addAll(consultorio);
 
-        VBox info1 = new VBox();
-        info1.getChildren().addAll(new Separator(),hBoxCodigo, hBoxNombre, hBoxCantidad, hBoxFechaVence,hBoxProveedor,hBoxConsultorio, new Separator());
+        info1 = new VBox();
+        info1.getChildren().addAll(new Separator(),hboxIdSuministro1, hboxNombre1, hboxCantidad1, hboxFechaVence1,hboxFechaRegistro1,hboxIdProveedor1,hboxIdUsuario1,hboxIdConsultorio1, new Separator());
 
         info = new VBox();
-        info.getChildren().addAll(info1);
+                
+        HBox hboxOptions = new HBox();
+        hboxOptions.getChildren().addAll(clear, save, cancel);
         
+        info2 = new VBox();
+        info2.getChildren().addAll(hboxNombre, hboxCantidad, hboxFechaVence, hboxIdProveedor, hboxIdConsultorio, hboxOptions);
+        sp1.setContent(info2);
+        info.getChildren().addAll(info1,sp1);
+                
         contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, back,plus);
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
@@ -235,7 +325,7 @@ this.conect = conect;
         contenedorGeneral.getChildren().addAll(contenedor1, contenedor2);
         rootPane.getChildren().addAll(contenedorGeneral);
         setButtons();
-        info.setVisible(false);
+        info1.setVisible(false);
 
         
     }
@@ -276,7 +366,7 @@ this.conect = conect;
                                     + "'" + this.tf_search.textProperty().get() + "'" + ";");
                             int cont=0;
                             while (rs.next()) {
-                                sumin = new SuministroData(rs.getString("nombre"),  rs.getInt("cantidad"), rs.getDate("fechaVencimiento"));
+                                sumin = new SuministroData(rs.getString("idSuministro"), rs.getString("nombre"),  rs.getInt("cantidad"), rs.getDate("fechaVencimiento"));
                                 this.data.add(sumin);
                                 System.out.println(rs.getString("nombre"));
                                 cont++;
@@ -301,7 +391,7 @@ this.conect = conect;
                                     + "'%" + this.tf_search.textProperty().get() + "%'" + ";");
                             int size = 0;
                             while (rs.next()) {
-                                sumin = new SuministroData(rs.getString("nombre"), rs.getInt("cantidad"), rs.getDate("fechaVencimiento"));
+                                sumin = new SuministroData(rs.getString("idSuministro"), rs.getString("nombre"), rs.getInt("cantidad"), rs.getDate("fechaVencimiento"));
                                 this.data.add(sumin);
                                 System.out.println(rs.getString("nombre"));
                                 size++;
@@ -326,8 +416,32 @@ this.conect = conect;
                     break;
             }
         });
-        this.back.setOnAction(e->{
-            this.selectBack=false;
+        this.cancel.setOnAction(e -> {
+            clear();
+            info1.setVisible(false);
+        });
+        this.plus.setOnAction(e -> {
+            clear();
+            info1.setVisible(true);
+        });
+        this.clear.setOnAction(e -> {
+
+            clear();
+
+        });
+
+        this.modif.setOnAction(e -> {
+            if (this.sumin != null) {
+                info1.setVisible(true);
+
+                dataCodigo.setText(sumin.getCodigo());
+                dataNombre.setText(sumin.getName());
+                dataCantidad.setText(sumin.getCantidad().toString());
+                tf_fecha.setValue(sumin.getFechaVencimiento().toLocalDate());
+                tf_proveedores.setValue(sumin.getIdProveedor());
+                tf_consultorios.setValue(sumin.getIdConsultorio());
+
+            }
         });
         this.plus.setOnAction(e->{
             if (this.selectPlus==false){
@@ -344,7 +458,7 @@ this.conect = conect;
             
         });
     
-        ingresar.setOnAction(e->{
+        save.setOnAction(e->{
             System.out.println("Entro1");
             date1 = java.sql.Date.valueOf(fechaElegida.format(DateTimeFormatter.ISO_DATE));
             if (!this.dataCodigo.textProperty().get().equals("") && !this.dataNombre.textProperty().get().equals("")
@@ -352,24 +466,24 @@ this.conect = conect;
                 if ((this.dataCodigo.textProperty().get().length() <= 5) && (this.dataNombre.textProperty().get().length() <= 30)
                         && (this.dataCantidad.textProperty().get().length() <= 11) ) {
                     try {
-                
+                        String cantSumin = cantidadSuministros();
                         PreparedStatement pps =this.conect.getCo().prepareStatement("INSERT INTO suministro(idSuministro,nombre,cantidad,fechaVencimiento,idConsultorio) VALUES(?,?,?,?,?)");
-                        pps.setString(1, this.dataCodigo.textProperty().get());
+                        pps.setString(1, cantSumin);
                         pps.setString(2, this.dataNombre.textProperty().get());
                         pps.setInt(3, Integer.parseInt(this.dataCantidad.textProperty().get()));
                         pps.setDate(4, date1);
                         pps.setString(5, (String)tf_consultorios.getValue());
                         
                         PreparedStatement ps =this.conect.getCo().prepareStatement("INSERT INTO compra(idCompra,idUsuario,idSuministro,idProveedor) VALUES(?,?,?,?);");
-                        ps.setString(1, "com"+cantidadCompras());
+                        ps.setString(1, cantidadCompras());
                         ps.setString(2, getUsuario().getIdUsuario());
-                        ps.setString(3, this.dataCodigo.textProperty().get());
+                        ps.setString(3, cantSumin);
                         ps.setString(4, (String) tf_proveedores.getValue());
                 
                         PreparedStatement s =this.conect.getCo().prepareStatement("INSERT INTO inventario(idInventario,idUsuario,idSuministro,fechaRegistro) VALUES(?,?,?,?);");
-                        s.setString(1, "inv"+numInventario());
+                        s.setString(1, numInventario());
                         s.setString(2, getUsuario().getIdUsuario());
-                        s.setString(3, this.dataCodigo.textProperty().get());
+                        s.setString(3, cantSumin);
                         LocalDate localTime=LocalDate.now();
                         java.sql.Date dateDB = java.sql.Date.valueOf(localTime);
                         s.setDate(4,dateDB ); 
@@ -392,16 +506,27 @@ this.conect = conect;
     }
 
    
+    public void clear() {
+        dataCodigo.clear();
+        dataNombre.clear();
+        dataCantidad.clear();
+        tf_fecha.setValue(null);
+        tf_proveedores.getItems().clear();
+        llenarComboBoxProveedores();
+        tf_consultorios.getItems().clear();
+        llenarComboBoxConsultorios();
+    }
+    
     public void llenarTabla(){
         table.getItems().clear();
         data.clear();
 
             try {
-                ResultSet rs = this.conect.getSta().executeQuery("select * from usuario;");
+                ResultSet rs = this.conect.getSta().executeQuery("select * from suministro;");
 
                 while (rs.next()) {
-                    sumin = new SuministroData(rs.getString("nombre"), rs.getInt("Cantidad"),
-                            rs.getDate("fechaNacimiento"));
+                    sumin = new SuministroData(rs.getString("idSuministro"), rs.getString("nombre"), rs.getInt("cantidad"),
+                            rs.getDate("fechaVencimiento"));
                     this.data.add(sumin);
                     //System.out.println(rs.getString("nombre"));
 
@@ -418,21 +543,50 @@ this.conect = conect;
         return login.getUsuarioTemp();
     }
         
-    public int cantidadCompras(){
+    public String cantidadSuministros(){
+        int cont=0;
         try {
-            ResultSet rs = this.conect.getSta().executeQuery("select COUNT(*) as cantidad from compra;");
-            return rs.getInt("cantidad") +1;
+            ResultSet rs = this.conect.getSta().executeQuery("select * from suministro where idConsultorio = "+
+                    (String)tf_consultorios.getValue() +" ;");
+            while(rs.next()){
+                cont++;
+            }
+            cont++;
+            if(cont<10) return "S00"+cont;
+            else return "S0"+cont;
         } catch (Exception error) {
-            return 0;
+            return "";
+        }
+    }
+    
+    public String cantidadCompras(){
+        int cont=0;
+        try {
+            ResultSet rs = this.conect.getSta().executeQuery("select * from compra;");
+            while(rs.next()){
+                cont++;
+            }
+            cont++;
+            if(cont<10) return "P00"+cont;
+            else return "P0"+cont;
+        } catch (Exception error) {
+            return "";
         } 
     }
     
-    public int numInventario(){
+    public String numInventario(){
+        int cont=0;
         try {
-            ResultSet rs = this.conect.getSta().executeQuery("select COUNT(*) as cantidad from inventario;");
-            return rs.getInt("cantidad") +1;
+            ResultSet rs = this.conect.getSta().executeQuery("select *from inventario where idConsultorio = "+
+                    (String)tf_consultorios.getValue() +" ;");
+            while(rs.next()){
+               cont++; 
+            }
+            cont++;
+            if(cont<10) return "I00"+cont;
+            else return "I0"+cont;
         } catch (Exception error) {
-            return 0;
+            return "";
         }
     }
     
