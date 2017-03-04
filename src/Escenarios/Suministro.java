@@ -151,11 +151,11 @@ this.conect = conect;
 
         table.setEditable(true);
 
-        TableColumn nameCol = new TableColumn("Nombre");
+        TableColumn nameCol = new TableColumn(" Nombre ");
         nameCol.impl_setReorderable(false);
         nameCol.setMinWidth(100);
         nameCol.setCellValueFactory(
-                new PropertyValueFactory<SuministroData, String>("nombre"));
+                new PropertyValueFactory<SuministroData, String>("name"));
 
         TableColumn cantidadCol = new TableColumn("Cantidad");
         cantidadCol.impl_setReorderable(false);
@@ -241,34 +241,6 @@ this.conect = conect;
         hboxIdConsultorio1.getChildren().addAll(consultorio1, res_idConsultorio1);
         
         
-        
-        
-        table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SuministroData>() {
-
-            @Override
-            public void changed(ObservableValue<? extends SuministroData> observable, SuministroData oldValue, SuministroData newValue) {
-                //System.out.println(newValue.getName());
-                try{
-                    sumin = newValue;
-                    res_idsuministro1.setText(sumin.getCodigo());
-                    res_nombre1.setText(sumin.getName());
-                    res_cantidad1.setText(sumin.getCantidad().toString());
-                    res_fechaVencimiento1.setText(sumin.getFechaVencimiento().toLocalDate().toString());
-                    res_fechaRegistro1.setText(sumin.getFechaRegistro().toLocalDate().toString());
-                    res_idproveedor1.setText(sumin.getIdProveedor());
-                    res_idUsuario1.setText(sumin.getIdProveedor());
-                    res_idConsultorio1.setText(sumin.getIdConsultorio());
-
-                    info.setVisible(true);
-                }catch(NullPointerException e){
-                
-                }
-                
-                
-                
-            }
-        });
-
         final ScrollPane sp = new ScrollPane();
         sp.setVmax(3);
         sp.setPrefSize(400, 375);
@@ -317,15 +289,44 @@ this.conect = conect;
         info2.getChildren().addAll(hboxNombre, hboxCantidad, hboxFechaVence, hboxIdProveedor, hboxIdConsultorio, hboxOptions);
         sp1.setContent(info2);
         info.getChildren().addAll(info1,sp1);
+        
+        table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SuministroData>() {
+
+            @Override
+            public void changed(ObservableValue<? extends SuministroData> observable, SuministroData oldValue, SuministroData newValue) {
+                //System.out.println(newValue.getName());
+                try{
+                    sumin = newValue;
+                    res_idsuministro1.setText(sumin.getCodigo());
+                    res_nombre1.setText(sumin.getName());
+                    res_cantidad1.setText(sumin.getCantidad().toString());
+                    res_fechaVencimiento1.setText(sumin.getFechaVencimiento().toLocalDate().toString());
+                    res_fechaRegistro1.setText(sumin.getFechaRegistro().toLocalDate().toString());
+                    res_idproveedor1.setText(sumin.getIdProveedor());
+                    res_idUsuario1.setText(sumin.getIdProveedor());
+                    res_idConsultorio1.setText(sumin.getIdConsultorio());
+                    info2.setVisible(false);
+                    info1.setVisible(true);
+                }catch(NullPointerException e){
+                    info2.setVisible(false);               // ocurre un excepcion por eso ambos false
+                    info1.setVisible(false);
+                }
                 
-        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, back,plus);
+                
+                
+            }
+        });
+
+        
+                
+        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, back,plus,modif);
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
         contenedor2.getChildren().addAll(sp, info);
         contenedorGeneral.getChildren().addAll(contenedor1, contenedor2);
         rootPane.getChildren().addAll(contenedorGeneral);
         setButtons();
-        info1.setVisible(false);
+        //info1.setVisible(false);
 
         
     }
@@ -362,7 +363,7 @@ this.conect = conect;
 
                     } else {
                         try {
-                            ResultSet rs = this.conect.getSta().executeQuery("select * from usuario where idUsuario="
+                            ResultSet rs = this.conect.getSta().executeQuery("select * from suministro where idSuministro="
                                     + "'" + this.tf_search.textProperty().get() + "'" + ";");
                             int cont=0;
                             while (rs.next()) {
@@ -387,8 +388,8 @@ this.conect = conect;
                     if (this.tf_search.textProperty().get().equals("")) {
                     } else {
                         try {
-                            ResultSet rs = this.conect.getSta().executeQuery("select * from usuario where nombre like "
-                                    + "'%" + this.tf_search.textProperty().get() + "%'" + ";");
+                            ResultSet rs = this.conect.getSta().executeQuery("select * from suministro where nombre like "
+                                    + "'" + this.tf_search.textProperty().get() + "%'" + ";");
                             int size = 0;
                             while (rs.next()) {
                                 sumin = new SuministroData(rs.getString("idSuministro"), rs.getString("nombre"), rs.getInt("cantidad"), rs.getDate("fechaVencimiento"));
@@ -418,49 +419,37 @@ this.conect = conect;
         });
         this.cancel.setOnAction(e -> {
             clear();
-            info1.setVisible(false);
+            info2.setVisible(false);
         });
         this.plus.setOnAction(e -> {
             clear();
-            info1.setVisible(true);
+            info2.setVisible(true);
         });
         this.clear.setOnAction(e -> {
 
             clear();
 
         });
-
+        this.back.setOnAction(e ->{
+           this.selectBack=false; 
+        });
         this.modif.setOnAction(e -> {
             if (this.sumin != null) {
-                info1.setVisible(true);
+                info2.setVisible(true);
 
                 dataCodigo.setText(sumin.getCodigo());
                 dataNombre.setText(sumin.getName());
                 dataCantidad.setText(sumin.getCantidad().toString());
-                tf_fecha.setValue(sumin.getFechaVencimiento().toLocalDate());
+                tf_fecha.setValue(sumin.getFechaVencimiento().toLocalDate());  // puede ser null
                 tf_proveedores.setValue(sumin.getIdProveedor());
                 tf_consultorios.setValue(sumin.getIdConsultorio());
 
             }
         });
-        this.plus.setOnAction(e->{
-            if (this.selectPlus==false){
-                hBoxCodigo.getChildren().add( dataCodigo);
-                hBoxNombre.getChildren().add( dataNombre);
-                hBoxCantidad.getChildren().add(dataCantidad);
-                hBoxFechaVence.getChildren().add( tf_fecha );
-                hBoxProveedor.getChildren().add(tf_proveedores);
-                hBoxConsultorio.getChildren().add(tf_consultorios);
-                info.getChildren().add(ingresar);
-                info.setVisible(true);
-            }
-                    
-            
-        });
-    
+        
         save.setOnAction(e->{
             System.out.println("Entro1");
-            date1 = java.sql.Date.valueOf(fechaElegida.format(DateTimeFormatter.ISO_DATE));
+            date1 = java.sql.Date.valueOf(fechaElegida.format(DateTimeFormatter.ISO_DATE));  // puede ser null
             if (!this.dataCodigo.textProperty().get().equals("") && !this.dataNombre.textProperty().get().equals("")
                     && !this.dataCantidad.textProperty().get().equals("")  ) {
                 if ((this.dataCodigo.textProperty().get().length() <= 5) && (this.dataNombre.textProperty().get().length() <= 30)
