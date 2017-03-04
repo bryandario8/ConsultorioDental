@@ -47,6 +47,7 @@ public class Login {
     HBox hbox_usuario;
     HBox hbox_clave;
     ImageView fondo;
+    Image logImg;
     ConexionSQL conect;
     public Usuario usuarioTemp;
     Text mensaje;
@@ -61,9 +62,9 @@ public class Login {
         mensaje.setFill(Color.RED);
 
         fondo = new ImageView();
-        fondo.setImage(new Image("Img/fondo.jpg"));
+        fondo.setImage(new Image("Img/fondo3.png"));
         fondo.setFitWidth(Settings.SCENE_WIDTH + 20);
-        fondo.setFitHeight(Settings.SCENE_HEIGHT + 20);
+        fondo.setFitHeight(Settings.SCENE_HEIGHT + 130);
         rootPane.getChildren().add(fondo);
 
         lista = new VBox();
@@ -73,36 +74,51 @@ public class Login {
         tf_clave = new TextField();
 
         login = new Button("Login");
+        Image imageLog = new Image(getClass().getResourceAsStream("/Img/log.png"));
+        login.setGraphic(new ImageView(imageLog));
+        
         exit = new Button("Exit");
+        Image imageExit = new Image(getClass().getResourceAsStream("/Img/exit.gif"));
+        exit.setGraphic(new ImageView(imageExit));
 
         hbox_usuario = new HBox();
         hbox_usuario.getChildren().addAll(textnombre, tf_nombre);
         hbox_usuario.setAlignment(Pos.CENTER);
+        hbox_usuario.setSpacing(25);
+        
         hbox_clave = new HBox();
         hbox_clave.getChildren().addAll(textclave, tf_clave);
         hbox_clave.setAlignment(Pos.CENTER);
+        hbox_clave.setSpacing(40);
+                
         seteo();
+        
         HBox contenedor = new HBox();
         contenedor.getChildren().addAll(login, exit);
         contenedor.setAlignment(Pos.CENTER);
+        contenedor.setSpacing(30);
+        
+        
         lista.getChildren().addAll(hbox_usuario, hbox_clave, contenedor, mensaje);
         lista.setAlignment(Pos.CENTER);
+        lista.setSpacing(15);
+        
         rootPane.getChildren().addAll(lista);
         metOnClick();
     }
 
     public void seteo() {
         textnombre.setText("Usuario: ");
-        textnombre.setFont(new Font("helvetica", 20.0));
-        textnombre.setTextFill(Color.WHITE);
+        textnombre.setFont(Font.font("Cambria", FontWeight.BOLD, 15.0));
+        textnombre.setTextFill(Color.BLACK);
 
         tf_nombre.setPromptText("Ingrese su usuario");
 
         textclave.setText("Clave: ");
-        textclave.setFont(new Font("helvetica", 20.0));
-        textclave.setTextFill(Color.WHITE);
+        textclave.setFont(Font.font("Cambria", FontWeight.BOLD, 15.0));
+        textclave.setTextFill(Color.BLACK);
 
-        tf_clave.setPromptText("Ingrese su clave");
+        tf_clave.setPromptText("Ingrese su contraseña");
     }
 
     public StackPane getRootPane() {
@@ -124,9 +140,9 @@ public class Login {
             public void handle(ActionEvent t) {
                 if (tf_nombre.textProperty().get().equals("")) {
                     if (tf_clave.textProperty().get().equals("")) {
-                        mensaje.setText("Ingrese los campos por favor");
+                        mensaje.setText("Ingrese los campos, por favor");
                     }
-                    mensaje.setText("Ingrese los campos por favor");
+                    mensaje.setText("Ingrese los campos, por favor");
 
                 } else {
                     try {
@@ -151,7 +167,7 @@ public class Login {
                             }
                         }
                         if (size == 0) {
-                            mensaje.setText("No existe ningun usuario con ese nombre");
+                            mensaje.setText("No existe ningún usuario con ese nombre");
                         }
 
                     } catch (Exception error) {
@@ -185,7 +201,5 @@ public class Login {
     public void setState2(Boolean state2) {
         this.state2 = state2;
     }
-    
-    
 
 }
