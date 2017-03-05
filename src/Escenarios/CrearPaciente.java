@@ -163,19 +163,19 @@ public class CrearPaciente {
 
         table.setEditable(false);
 
-        TableColumn cedula = new TableColumn("cedula");
+        TableColumn cedula = new TableColumn("Cédula");
         cedula.impl_setReorderable(false);
         cedula.setMinWidth(100);
         cedula.setCellValueFactory(
                 new PropertyValueFactory<DataPaciente, String>("cedula"));
 
-        TableColumn nombre = new TableColumn("nombre");
+        TableColumn nombre = new TableColumn("Nombre");
         nombre.impl_setReorderable(false);
         nombre.setMinWidth(100);
         nombre.setCellValueFactory(
                 new PropertyValueFactory<DataPaciente, String>("nombre"));
 
-        TableColumn apellido = new TableColumn("apellido");
+        TableColumn apellido = new TableColumn("Apellido");
         apellido.impl_setReorderable(false);
         apellido.setMinWidth(180);
         apellido.setCellValueFactory(

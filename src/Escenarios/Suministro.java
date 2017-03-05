@@ -1,33 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Escenarios;
 
 import Constantes.Settings;
-import java.time.LocalTime;
 import Recursos.ConexionSQL;
-import Recursos.Person;
 import Recursos.SuministroData;
 import Recursos.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.sql.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -119,7 +110,7 @@ this.conect = conect;
        
         ToggleGroup group = new ToggleGroup();
 
-        RadioButton rb1 = new RadioButton("Codigo");
+        RadioButton rb1 = new RadioButton("Código");
         rb1.setToggleGroup(group);
         rb1.setUserData("A");
 
@@ -149,14 +140,35 @@ this.conect = conect;
         tf_search = new TextField("");
 
         search = new Button("Search");
+        Image imageSearch = new Image(getClass().getResourceAsStream("/Img/search.png"));
+        search.setGraphic(new ImageView(imageSearch));
+        
+        plus = new Button("Add");
+        Image imagePlus = new Image(getClass().getResourceAsStream("/Img/user.png"));
+        plus.setGraphic(new ImageView(imagePlus));
+        
+        modif = new Button("Edit");
+        Image imageEdit = new Image(getClass().getResourceAsStream("/Img/edit.png"));
+        modif.setGraphic(new ImageView(imageEdit));
+        
         back = new Button("Back");
-        plus=new Button("+");
-        modif = new Button("Modificar");
-        clear = new Button(" Clear ");
-        save = new Button(" Save ");
-        cancel = new Button(" Cancel ");
+        Image imageBack = new Image(getClass().getResourceAsStream("/Img/back.gif"));
+        back.setGraphic(new ImageView(imageBack));
+        
+        clear = new Button("Clear");
+        Image imageClear = new Image(getClass().getResourceAsStream("/Img/clear.png"));
+        clear.setGraphic(new ImageView(imageClear));
+        
+        save = new Button("Save");
+        Image imageSave = new Image(getClass().getResourceAsStream("/Img/save.png"));
+        save.setGraphic(new ImageView(imageSave));
+        
+        cancel = new Button("Cancel");
+        Image imageCancel = new Image(getClass().getResourceAsStream("/Img/cancel.gif"));
+        cancel.setGraphic(new ImageView(imageCancel));
         
         HBox contenedor1 = new HBox();
+        contenedor1.setSpacing(52);
 
         table.setEditable(true);
 
@@ -181,39 +193,36 @@ this.conect = conect;
         table.getColumns().addAll(nameCol, cantidadCol, fechaCol);
 
         Label label = new Label("Datos");
-        label.setFont(new Font("Arial", 20));
-        ingresar=new Button ("Ingresar");
-        Label codigo1 = new Label("Codigo : ");
-        codigo1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label nombre1 = new Label("Nombre : ");
-        nombre1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label cantidad1 = new Label("Cantidad : ");
-        cantidad1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label fechaVence1= new Label("Fecha de Vencimiento : ");
-        fechaVence1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label fechaRegistro1= new Label("Fecha de Registro : ");
-        fechaRegistro1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label proveedor1 = new Label("Nombre de Proveedor : ");       
-        proveedor1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label usuario1 = new Label("Nombre de Usuario : ");       
-        usuario1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label consultorio1 = new Label("Nombre del Consultorio : ");       
-        consultorio1.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        label.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
+        ingresar = new Button ("Ingresar");
+        Label codigo1 = new Label("Código: ");
+        codigo1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label nombre1 = new Label("Nombre: ");
+        nombre1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label cantidad1 = new Label("Cantidad: ");
+        cantidad1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label fechaVence1= new Label("Fecha de Vencimiento: ");
+        fechaVence1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label fechaRegistro1= new Label("Fecha de Registro: ");
+        fechaRegistro1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label proveedor1 = new Label("Proveedor: ");       
+        proveedor1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label usuario1 = new Label("Usuario: ");       
+        usuario1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label consultorio1 = new Label("Consultorio: ");       
+        consultorio1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         
         
-        Label nombre = new Label("Nombre : ");
-        nombre.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label cantidad = new Label("Cantidad : ");
-        cantidad.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label fechaVence= new Label("Fecha de Vencimiento : ");
-        fechaVence.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label proveedor = new Label("Nombre de Proveedor : ");       
-        proveedor.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        Label consultorio = new Label("Nombre del Consultorio : ");       
-        consultorio.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        
-        
-        
+        Label nombre = new Label("Nombre: ");
+        nombre.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label cantidad = new Label("Cantidad: ");
+        cantidad.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label fechaVence= new Label("Fecha de Vencimiento: ");
+        fechaVence.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label proveedor = new Label("Proveedor: ");       
+        proveedor.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label consultorio = new Label("Consultorio: ");       
+        consultorio.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         
         Label res_idsuministro1 = new Label();
         Label res_nombre1 = new Label();
@@ -258,28 +267,19 @@ this.conect = conect;
         final ScrollPane sp1 = new ScrollPane();
         sp1.setVmax(3);
         sp1.setPrefSize(400, 375);
-       
-        
-        
-        
-       
-        
+
         dataCodigo = new TextField();
         dataNombre = new TextField();
         dataCantidad = new TextField();
         
-       
         llenarComboBoxProveedores();
         tf_proveedores.setPromptText(" Proveedores ");
         tf_proveedores.setEditable(true);
-        
-        
+
         llenarComboBoxConsultorios();
         tf_consultorios.setPromptText(" Consultorios Disponibles ");
         tf_consultorios.setEditable(true);
-        
-        
-        
+
         hboxNombre.getChildren().addAll(nombre);
         hboxCantidad.getChildren().addAll(cantidad);
         hboxFechaVence.getChildren().addAll(fechaVence);
@@ -288,14 +288,20 @@ this.conect = conect;
 
         info1 = new VBox();
         info1.getChildren().addAll(new Separator(),hboxIdSuministro1, hboxNombre1, hboxCantidad1, hboxFechaVence1,hboxFechaRegistro1,hboxIdProveedor1,hboxIdUsuario1,hboxIdConsultorio1, new Separator());
-
+        info1.setPadding(new Insets(10, 10, 10, 10));
+        
         info = new VBox();
                 
         HBox hboxOptions = new HBox();
         hboxOptions.getChildren().addAll(clear, save, cancel);
+        hboxOptions.setAlignment(Pos.CENTER);
+        hboxOptions.setSpacing(40);
         
         info2 = new VBox();
         info2.getChildren().addAll(hboxNombre, hboxCantidad, hboxFechaVence, hboxIdProveedor, hboxIdConsultorio, hboxOptions);
+        info2.setSpacing(5);
+        info2.setPadding(new Insets(15, 10, 10, 10));
+        
         sp1.setContent(info2);
         info.getChildren().addAll(info1,sp1);
         
@@ -320,15 +326,10 @@ this.conect = conect;
                     info2.setVisible(false);               // ocurre un excepcion por eso ambos false
                     info1.setVisible(false);
                 }
-                
-                
-                
             }
         });
 
-        
-                
-        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, back,plus,modif);
+        contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, plus, modif, back);
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
         contenedor2.getChildren().addAll(sp, info);
@@ -336,8 +337,6 @@ this.conect = conect;
         rootPane.getChildren().addAll(fondo, contenedorGeneral);
         setButtons();
         //info1.setVisible(false);
-
-        
     }
 
     public Suministro(ConexionSQL conect, Login login){

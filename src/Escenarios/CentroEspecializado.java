@@ -165,12 +165,12 @@ public class CentroEspecializado {
         nameCol.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("firstName"));
 
-        TableColumn direccionCol = new TableColumn("Direccion");
+        TableColumn direccionCol = new TableColumn("Dirección");
         direccionCol.setMinWidth(100);
         direccionCol.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("direccion"));   
 
-        TableColumn telefonoCol = new TableColumn("Telefono");
+        TableColumn telefonoCol = new TableColumn("Teléfono");
         telefonoCol.setMinWidth(200);
         telefonoCol.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("telefonos"));

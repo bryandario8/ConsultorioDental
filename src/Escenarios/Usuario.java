@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Escenarios;
 
 import Constantes.Settings;
@@ -121,13 +116,13 @@ public class Usuario {
         idUsuario.setCellValueFactory(
                 new PropertyValueFactory<Usuarios, String>("idUsuario"));
 
-        TableColumn nombre = new TableColumn("nombre");
+        TableColumn nombre = new TableColumn("Nombre");
         nombre.impl_setReorderable(false);
         nombre.setMinWidth(100);
         nombre.setCellValueFactory(
                 new PropertyValueFactory<Usuarios, String>("nombre"));
 
-        TableColumn apellido = new TableColumn("apellido");
+        TableColumn apellido = new TableColumn("Apellido");
         apellido.impl_setReorderable(false);
         apellido.setMinWidth(180);
         apellido.setCellValueFactory(

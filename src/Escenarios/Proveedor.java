@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Escenarios;
 
 import Constantes.Settings;
@@ -11,12 +6,7 @@ import Recursos.Person;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,8 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -152,19 +140,15 @@ public class Proveedor {
         Image imageCancel = new Image(getClass().getResourceAsStream("/Img/cancel.gif"));
         cancel.setGraphic(new ImageView(imageCancel));
         
-        
-        
-        
-
         table.setEditable(true);
 
-        TableColumn nameCol = new TableColumn("Name");
+        TableColumn nameCol = new TableColumn("Nombre");
         nameCol.setMinWidth(100);
         nameCol.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("firstName"));
 
         //ArrayList
-        TableColumn telefonoCol = new TableColumn("Telefono");
+        TableColumn telefonoCol = new TableColumn("Teléfono");
         telefonoCol.setMinWidth(100);
         telefonoCol.setCellValueFactory(
                 new PropertyValueFactory<Person, String >("telefonos"));   // incluir telefono como una Lista de String (en este caso sólo 1)
@@ -225,9 +209,6 @@ public class Proveedor {
         dataTelefono = new TextField();
         dataEmail = new TextField();
        
-
-        
-        
         hBoxRuc.getChildren().addAll(ruc,res_ruc);
         hBoxNombre.getChildren().addAll(nombre,res_nombre);
         hBoxDireccion.getChildren().addAll(direccion,res_direccion);
@@ -250,7 +231,6 @@ public class Proveedor {
         hboxOptions.getChildren().addAll(clear, save, cancel);
         hboxOptions.setAlignment(Pos.CENTER);
         hboxOptions.setSpacing(40);
-        
         
         info1 = new VBox();
         info1.getChildren().addAll(new Separator(),hBoxRuc, hBoxNombre, hBoxDireccion, hBoxTelefono, hBoxEmail, new Separator());
@@ -286,10 +266,6 @@ public class Proveedor {
                     info1.setVisible(false);
                     info2.setVisible(false);
                 }
-                
-                
-                
-                
             }
         });
 
