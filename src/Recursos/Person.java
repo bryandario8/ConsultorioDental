@@ -23,6 +23,7 @@ public class Person {
     String email;
     String tipoDeSangre;
     String telefonos; 
+    String idUsuario;
     int tipo;
  
     public Person(String fName, String lName, String email) {
@@ -39,6 +40,16 @@ public class Person {
         this.telefonos = telefono;
         this.email = email;
         this.tipo = tipo;
+    }
+    
+    public Person(String ruc, String Name, String direccion, String telefono, String email, String idUsuario ){
+        
+        this.ruc = ruc;
+        this.firstName = Name;
+        this.direccion = direccion;
+        this.telefonos = telefono;
+        this.email = email;
+        this.idUsuario = idUsuario;
     }
 
     public String getFirstName() {
@@ -132,6 +143,14 @@ public class Person {
 
     public void setRuc(String ruc) {
         this.ruc = ruc;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
     
     

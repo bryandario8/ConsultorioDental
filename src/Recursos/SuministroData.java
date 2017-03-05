@@ -24,11 +24,16 @@ public class SuministroData {
     
     
  
-    public SuministroData(String codigo, String nombre, Integer cantidad, Date fechaVencimiento) {
+    public SuministroData(String codigo, String nombre, Integer cantidad, Date fechaVencimiento, Date fechaRegistro, 
+            String idProveedor, String idUsuario, String idConsultorio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.fechaVencimiento = fechaVencimiento;
+        this.fechaRegistro = fechaRegistro;
+        this.idProveedor = idProveedor;
+        this.idUsuario = idUsuario;
+        this.idConsultorio = idConsultorio;
         
     }
 

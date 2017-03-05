@@ -206,6 +206,7 @@ public class SceneOrganizer {
             if(centro.getState()){
                 scene.setRoot(centro.getRootPane());
                 centro.setState(false);
+                centro.llenarTabla();
             }
             if(!centro.getSelectBack()){
                 servicios.setState(true);

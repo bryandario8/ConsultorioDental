@@ -372,11 +372,14 @@ this.conect = conect;
 
                     } else {
                         try {
-                            ResultSet rs = this.conect.getSta().executeQuery("select * from suministro where idSuministro="
-                                    + "'" + this.tf_search.textProperty().get() + "'" + ";");
+                            ResultSet rs = this.conect.getSta().executeQuery("select * from suministro,inventario,compra where "
+                        + "suministro.idSuministro= inventario.idSuministro and suministro.idSuministro= compra.idSuministro and"
+                                    + " suministro.idSuministro= '" + this.tf_search.textProperty().get() + "'" + ";");
                             int cont=0;
                             while (rs.next()) {
-                                sumin = new SuministroData(rs.getString("idSuministro"), rs.getString("nombre"),  rs.getInt("cantidad"), rs.getDate("fechaVencimiento"));
+                                sumin = new SuministroData(rs.getString("idSuministro"), rs.getString("nombre"), rs.getInt("cantidad"),
+                            rs.getDate("fechaVencimiento"), rs.getDate("fechaRegistro"), rs.getString("idProveedor"),
+                            rs.getString("idUsuario"),rs.getString("idConsultorio"));
                                 this.data.add(sumin);
                                 System.out.println(rs.getString("nombre"));
                                 cont++;
@@ -397,11 +400,14 @@ this.conect = conect;
                     if (this.tf_search.textProperty().get().equals("")) {
                     } else {
                         try {
-                            ResultSet rs = this.conect.getSta().executeQuery("select * from suministro where nombre like "
-                                    + "'" + this.tf_search.textProperty().get() + "%'" + ";");
+                            ResultSet rs = this.conect.getSta().executeQuery("select * from suministro,inventario,compra where "
+                        + "suministro.idSuministro= inventario.idSuministro and suministro.idSuministro= compra.idSuministro and"
+                                    +  " suministro.nombre like '" + this.tf_search.textProperty().get() + "%'" + ";");
                             int size = 0;
                             while (rs.next()) {
-                                sumin = new SuministroData(rs.getString("idSuministro"), rs.getString("nombre"), rs.getInt("cantidad"), rs.getDate("fechaVencimiento"));
+                                sumin = new SuministroData(rs.getString("idSuministro"), rs.getString("nombre"), rs.getInt("cantidad"),
+                            rs.getDate("fechaVencimiento"), rs.getDate("fechaRegistro"), rs.getString("idProveedor"),
+                            rs.getString("idUsuario"),rs.getString("idConsultorio"));
                                 this.data.add(sumin);
                                 System.out.println(rs.getString("nombre"));
                                 size++;
@@ -520,11 +526,13 @@ this.conect = conect;
         data.clear();
 
             try {
-                ResultSet rs = this.conect.getSta().executeQuery("select * from suministro;");
+                ResultSet rs = this.conect.getSta().executeQuery("select * from suministro,inventario,compra where "
+                        + "suministro.idSuministro= inventario.idSuministro and suministro.idSuministro= compra.idSuministro;");
 
                 while (rs.next()) {
                     sumin = new SuministroData(rs.getString("idSuministro"), rs.getString("nombre"), rs.getInt("cantidad"),
-                            rs.getDate("fechaVencimiento"));
+                            rs.getDate("fechaVencimiento"), rs.getDate("fechaRegistro"), rs.getString("idProveedor"),
+                            rs.getString("idUsuario"),rs.getString("idConsultorio"));
                     this.data.add(sumin);
                     //System.out.println(rs.getString("nombre"));
 

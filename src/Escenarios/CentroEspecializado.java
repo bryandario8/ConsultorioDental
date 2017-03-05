@@ -21,6 +21,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -47,8 +48,8 @@ import javafx.scene.text.FontWeight;
  * @author FABKME
  */
 public class CentroEspecializado {
-StackPane rootPane;
- Boolean state=false;
+    StackPane rootPane;
+    Boolean state=false;
     Boolean selectPlus=true;
     Boolean selectBack=true;
     
@@ -63,23 +64,27 @@ StackPane rootPane;
     TextField tf_search;
     ConexionSQL conect;
     VBox info;
-   
+    VBox info1;
+    VBox info2;
+    
     ImageView fondo;
     
-    Button ingresar;
-    
+    Button clear;
+    Button save;
+    Button cancel;
     TextField dataRuc;
-        TextField dataNombre;
-        TextField dataDireccion;
-        TextField dataTelefono;
-        TextField dataEmail;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    TextField dataNombre;
+    TextField dataDireccion;
+    TextField dataTelefono;
+    TextField dataEmail;
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
-        HBox hBoxRuc = new HBox();
-        HBox hBoxNombre = new HBox();
-        HBox hBoxDireccion = new HBox();
-        HBox hBoxTelefono = new HBox();
-        HBox hBoxEmail = new HBox();
+    HBox hBoxRuc = new HBox();
+    HBox hBoxNombre = new HBox();
+    HBox hBoxDireccion = new HBox();
+    HBox hBoxTelefono = new HBox();
+    HBox hBoxEmail = new HBox();
+    HBox hBoxIdUsuario = new HBox();
 
     Login login;
 
@@ -138,14 +143,18 @@ StackPane rootPane;
         Image imageBack = new Image(getClass().getResourceAsStream("/Img/back.gif"));
         back.setGraphic(new ImageView(imageBack));
         
+        clear = new Button("Clear");
+        save = new Button("Save");
+        cancel = new Button("Cancel");
+        
         HBox contenedor1 = new HBox();
 
         table.setEditable(true);
 
-        TableColumn nameCol = new TableColumn("Name");
+        TableColumn nameCol = new TableColumn("Nombre");
         nameCol.setMinWidth(100);
         nameCol.setCellValueFactory(
-                new PropertyValueFactory<Person, String>("nombre"));
+                new PropertyValueFactory<Person, String>("firstName"));
 
         TableColumn direccionCol = new TableColumn("Direccion");
         direccionCol.setMinWidth(100);
@@ -155,19 +164,11 @@ StackPane rootPane;
         TableColumn telefonoCol = new TableColumn("Telefono");
         telefonoCol.setMinWidth(200);
         telefonoCol.setCellValueFactory(
-                new PropertyValueFactory<Person, String>("telefono"));
+                new PropertyValueFactory<Person, String>("telefonos"));
 
         table.getColumns().addAll(nameCol, direccionCol, telefonoCol);
 
-        table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Person>() {
-
-            @Override
-            public void changed(ObservableValue<? extends Person> observable, Person oldValue, Person newValue) {
-                System.out.println(newValue.getFirstName());
-                personTemp = newValue;
-                info.setVisible(true);
-            }
-        });
+        
         
         
         final ScrollPane sp = new ScrollPane();
@@ -175,10 +176,12 @@ StackPane rootPane;
         sp.setPrefSize(400, 375);
         sp.setContent(table);
         
-        
+        final ScrollPane sp1 = new ScrollPane();
+        sp1.setVmax(3);
+        sp1.setPrefSize(400, 375);
+
         Label label = new Label("DATOS");
         label.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
-        ingresar=new Button ("Ingresar");
         Label ruc = new Label("Código: ");
         ruc.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
         Label nombre = new Label("Nombre: ");
@@ -189,26 +192,101 @@ StackPane rootPane;
         email.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
         Label telefono = new Label("Teléfono: ");
         telefono.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        Label idUsuario = new Label("Id Usuario: ");
+        idUsuario.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
 
+        Label res_ruc = new Label();
+        Label res_nombre = new Label();
+        Label res_direccion = new Label();
+        Label res_telefono = new Label();
+        Label res_email = new Label();
+        Label res_idUsuario = new Label();
+        
+        
+        Label ruc1 = new Label("Código: ");
+        ruc1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        Label nombre1 = new Label("Nombre: ");
+        nombre1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        Label direccion1 = new Label("Dirección: ");
+        direccion1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        Label email1 = new Label("Email: ");
+        email1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        Label telefono1 = new Label("Teléfono: ");
+        telefono1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+
+        
+        
         dataRuc = new TextField();
         dataNombre = new TextField();
         dataDireccion = new TextField();
         dataTelefono = new TextField();
         dataEmail = new TextField();
         
+        HBox hboxRuc1 = new HBox();
+        HBox hboxNombre1 = new HBox();
+        HBox hboxDireccion1 = new HBox();
+        HBox hboxTelefono1 = new HBox();
+        HBox hboxEmail1 = new HBox();
+        HBox hboxIdUsuario1 = new HBox();
         
         
-        hBoxRuc.getChildren().addAll(ruc, dataRuc);
-        hBoxNombre.getChildren().addAll(nombre, dataNombre);
-        hBoxDireccion.getChildren().addAll(direccion, dataDireccion);
-        hBoxTelefono.getChildren().addAll(telefono, dataTelefono);
-        hBoxEmail.getChildren().addAll(email, dataEmail);
-
-        VBox info1 = new VBox();
-        info1.getChildren().addAll(new Separator(),hBoxRuc, hBoxNombre, hBoxDireccion, hBoxTelefono, hBoxEmail, new Separator(),ingresar);
-
+        hBoxRuc.getChildren().addAll(ruc, res_ruc);
+        hBoxNombre.getChildren().addAll(nombre, res_nombre);
+        hBoxDireccion.getChildren().addAll(direccion, res_direccion);
+        hBoxTelefono.getChildren().addAll(telefono, res_telefono);
+        hBoxEmail.getChildren().addAll(email, res_email);
+        hBoxIdUsuario.getChildren().addAll(idUsuario, res_idUsuario);
+        
+        info1 = new VBox();
+        info1.getChildren().addAll(new Separator(),hBoxRuc, hBoxNombre, hBoxDireccion, hBoxTelefono, hBoxEmail, hBoxIdUsuario, new Separator());
+        info1.setPadding(new Insets(5, 10, 5, 10));
+        info1.setVisible(false);
+        
+        
+        hboxRuc1.getChildren().addAll(ruc1,dataRuc);
+        hboxNombre1.getChildren().addAll(nombre1,dataNombre);
+        hboxDireccion1.getChildren().addAll(direccion1,dataDireccion);
+        hboxTelefono1.getChildren().addAll(telefono1,dataTelefono);
+        hboxEmail1.getChildren().addAll(email1,dataEmail);
+        //hboxIdUsuario.getChildren().addAll(idUsuario1,tf_usuarios);
+        
+        
+        HBox hboxOptions = new HBox();
+        hboxOptions.getChildren().addAll(clear,save,cancel);
+        
+        info2 = new VBox();
+        info2.getChildren().addAll(hboxRuc1, hboxNombre1, hboxDireccion1, hboxTelefono1, hboxEmail1, hboxOptions);
+        info2.setSpacing(1);
+        info2.setPadding(new Insets(10, 10, 10, 10));
+        
+        sp1.setContent(info2);
+                
         info = new VBox();
-        info.getChildren().addAll(info1);
+        info.getChildren().addAll(info1,sp1);
+        
+        table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Person>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Person> observable, Person oldValue, Person newValue) {
+                //System.out.println(newValue.getFirstName());
+                try{
+                    personTemp = newValue;
+                    res_ruc.setText(personTemp.getRuc());
+                    res_nombre.setText(personTemp.getFirstName());
+                    res_direccion.setText(personTemp.getDireccion());
+                    res_telefono.setText(personTemp.getTelefonos());
+                    res_email.setText(personTemp.getEmail());
+                    res_idUsuario.setText(personTemp.getIdUsuario());
+                    info1.setVisible(true);
+                    //info2.setVisible(false);
+                }catch(NullPointerException e){
+                    info1.setVisible(false);
+                    info2.setVisible(false);
+                }
+                
+            }
+        });
+        
         contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, plus, modif, back);
         contenedor1.setSpacing(50);
         
@@ -218,7 +296,7 @@ StackPane rootPane;
         contenedorGeneral.getChildren().addAll(contenedor1, contenedor2);
         rootPane.getChildren().addAll(fondo, contenedorGeneral);
         setButtons();
-        info.setVisible(false);
+        info2.setVisible(false);
     }
     
     public CentroEspecializado(ConexionSQL conect, Login login){
@@ -232,7 +310,14 @@ StackPane rootPane;
     }
 
     public void setButtons() {
-        
+        this.cancel.setOnAction(e ->{
+            info2.setVisible(false);
+            clear();
+        });
+        this.clear.setOnAction(e ->{
+            clear(); 
+        });
+
         this.search.setOnAction(e -> {
             table.getItems().clear();
             data.clear();
@@ -250,7 +335,8 @@ StackPane rootPane;
                                     + "'" + this.tf_search.textProperty().get() + "'" + ";");
 
                             while (rs.next()) {
-                                personTemp = new Person(rs.getString("nombre"),  rs.getString("direccion"), rs.getString("telefono"));
+                                personTemp = new Person(rs.getString("ruc"), rs.getString("nombre"),  rs.getString("direccion"),
+                                        rs.getString("telefono"), rs.getString("email"),rs.getString("idUsuario"));
                                 this.data.add(personTemp);
                                 System.out.println(rs.getString("nombre"));
 
@@ -270,10 +356,11 @@ StackPane rootPane;
                     } else {
                         try {
                             ResultSet rs = this.conect.getSta().executeQuery("select * from centro_especializado where nombre like "
-                                    + "'%" + this.tf_search.textProperty().get() + "%'" + ";");
+                                    + "'" + this.tf_search.textProperty().get() + "%'" + ";");
                             int size = 0;
                             while (rs.next()) {
-                                personTemp = new Person(rs.getString("nombre"), rs.getString("direccion"), rs.getString("telefono"));
+                                personTemp = new Person(rs.getString("ruc"), rs.getString("nombre"),  rs.getString("direccion"),
+                                        rs.getString("telefono"), rs.getString("email"),rs.getString("idUsuario"));
                                 this.data.add(personTemp);
                                 System.out.println(rs.getString("nombre"));
                                 size++;
@@ -301,26 +388,29 @@ StackPane rootPane;
         this.back.setOnAction(e->{
             this.selectBack=false;
         });
-        this.plus.setOnAction(e->{
-            if (this.selectPlus==false){
-                hBoxRuc.getChildren().add( dataRuc);
-                hBoxNombre.getChildren().add( dataNombre);
-                hBoxDireccion.getChildren().add(dataDireccion);
-                hBoxTelefono.getChildren().add( dataTelefono);
-                hBoxEmail.getChildren().add(dataEmail);
-                
-                info.getChildren().add(ingresar);
-                info.setVisible(true);
+        this.modif.setOnAction(e -> {
+            if (this.personTemp != null) {
+                info2.setVisible(true);
+
+                dataRuc.setText(personTemp.getRuc());
+                dataNombre.setText(personTemp.getFirstName());
+                dataDireccion.setText(personTemp.getDireccion());
+                dataTelefono.setText(personTemp.getTelefonos());
+                dataEmail.setText(personTemp.getEmail());
+                //tf_usuario.setValue()
             }
-                    
-            
         });
         
-        ingresar.setOnAction(e->{
+        this.plus.setOnAction(e->{
+            clear();
+            this.info2.setVisible(true);
+        });
+        
+        save.setOnAction(e->{
             if (!this.dataRuc.textProperty().get().equals("") && !this.dataNombre.textProperty().get().equals("")
                     && !this.dataDireccion.textProperty().get().equals("") && !this.dataTelefono.textProperty().get().equals("")
                     && !this.dataEmail.textProperty().get().equals("") ) {
-                if ((this.dataRuc.textProperty().get().length() <= 10) && (this.dataNombre.textProperty().get().length() <= 30) && (this.dataTelefono.textProperty().get().length() <= 10)
+                if ((this.dataRuc.textProperty().get().length() <= 13) && (this.dataNombre.textProperty().get().length() <= 30) && (this.dataTelefono.textProperty().get().length() <= 10)
                         && (this.dataDireccion.textProperty().get().length() <= 50) && this.dataEmail.textProperty().get().length() <= 30 ) {
                     try {
 
@@ -344,6 +434,39 @@ StackPane rootPane;
         
     }
 
+    public void clear() {
+        dataRuc.clear();
+        dataNombre.clear();
+        dataDireccion.clear();
+        dataTelefono.clear();
+        dataEmail.clear();
+        
+    }
+    
+    public void llenarTabla(){
+        table.getItems().clear();
+            data.clear();
+
+            try {
+                ResultSet rs = this.conect.getSta().executeQuery("select * from centro_especializado;");
+
+                while (rs.next()) {
+                    personTemp = new Person(rs.getString("ruc"), rs.getString("nombre"), 
+                            rs.getString("direccion"), rs.getString("telefono"),
+                            rs.getString("email"), rs.getString("idUsuario"));
+                    this.data.add(personTemp);
+                    //System.out.println(rs.getString("nombre"));
+
+                }
+                if (data.isEmpty()) {
+                } else {
+                    table.setItems(data);
+                }
+            } catch (Exception error) {
+            }
+    }
+    
+    
     public Usuario getUsuario(){
         return login.getUsuarioTemp();
     }
@@ -388,13 +511,7 @@ StackPane rootPane;
         this.plus = plus;
     }
 
-    public Button getIngresar() {
-        return ingresar;
-    }
-
-    public void setIngresar(Button ingresar) {
-        this.ingresar = ingresar;
-    }
+    
     
     
 
