@@ -22,6 +22,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -140,8 +141,16 @@ public class Proveedor {
         back.setGraphic(new ImageView(imageBack));
         
         clear = new Button("Clear");
-        save = new Button("Clear");
+        Image imageClear = new Image(getClass().getResourceAsStream("/Img/clear.png"));
+        clear.setGraphic(new ImageView(imageClear));
+        
+        save = new Button("Save");
+        Image imageSave = new Image(getClass().getResourceAsStream("/Img/save.png"));
+        save.setGraphic(new ImageView(imageSave));
+        
         cancel = new Button("Cancel");
+        Image imageCancel = new Image(getClass().getResourceAsStream("/Img/cancel.gif"));
+        cancel.setGraphic(new ImageView(imageCancel));
         
         
         
@@ -210,8 +219,6 @@ public class Proveedor {
         Label res_telefono = new Label();
         Label res_email = new Label();
         
-        
-        
         dataRuc = new TextField();
         dataNombre = new TextField();
         dataDireccion = new TextField();
@@ -240,20 +247,19 @@ public class Proveedor {
         hboxEmail.getChildren().addAll(email1, dataEmail);
 
         HBox hboxOptions = new HBox();
-        hboxOptions.getChildren().addAll(clear,save,cancel);
+        hboxOptions.getChildren().addAll(clear, save, cancel);
+        hboxOptions.setAlignment(Pos.CENTER);
+        hboxOptions.setSpacing(40);
         
         
         info1 = new VBox();
         info1.getChildren().addAll(new Separator(),hBoxRuc, hBoxNombre, hBoxDireccion, hBoxTelefono, hBoxEmail, new Separator());
-        info1.setPadding(new Insets(5, 10, 5, 10));
-        
-        
-        
+        info1.setPadding(new Insets(10, 10, 10, 10));
         
         info2 = new VBox();
         info2.getChildren().addAll(hboxRuc, hboxNombre, hboxDireccion, hboxTelefono, hboxEmail, hboxOptions);
-        info2.setSpacing(1);
-        info2.setPadding(new Insets(10, 10, 10, 10));
+        info2.setSpacing(5);
+        info2.setPadding(new Insets(15, 10, 10, 10));
         
         sp1.setContent(info2);
         info2.setVisible(false);
@@ -289,7 +295,8 @@ public class Proveedor {
 
         HBox contenedor1 = new HBox();
         contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, plus, modif, back);
-        contenedor1.setSpacing(58);
+        contenedor1.setSpacing(57);
+        
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
         contenedor2.getChildren().addAll(sp, info);
@@ -299,11 +306,6 @@ public class Proveedor {
         setButtons();
         info1.setVisible(false);
 
-        
-
-        
-
-        
     }
 
     public StackPane getRootPane() {

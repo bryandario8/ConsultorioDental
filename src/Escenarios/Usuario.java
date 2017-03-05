@@ -109,6 +109,9 @@ public class Usuario {
         back.setGraphic(new ImageView(imageBack));
 
         HBox contenedor1 = new HBox();
+        contenedor1.setPadding(new Insets(0, 10, 0, 0));
+        contenedor1.setSpacing(110);
+        contenedor1.setAlignment(Pos.CENTER_RIGHT);
 
         table.setEditable(false);
 
@@ -354,7 +357,7 @@ public class Usuario {
         datosUsuario.setPadding(new Insets(5, 10, 5, 10));
         sp1.setContent(datosUsuario);
 
-        contenedor1.getChildren().addAll(search, plus, modif, back);
+        contenedor1.getChildren().addAll(plus, modif, back);
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
         contenedor2.getChildren().addAll(sp, info);

@@ -22,6 +22,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -144,8 +145,16 @@ public class CentroEspecializado {
         back.setGraphic(new ImageView(imageBack));
         
         clear = new Button("Clear");
+        Image imageClear = new Image(getClass().getResourceAsStream("/Img/clear.png"));
+        clear.setGraphic(new ImageView(imageClear));
+        
         save = new Button("Save");
+        Image imageSave = new Image(getClass().getResourceAsStream("/Img/save.png"));
+        save.setGraphic(new ImageView(imageSave));
+        
         cancel = new Button("Cancel");
+        Image imageCancel = new Image(getClass().getResourceAsStream("/Img/cancel.gif"));
+        cancel.setGraphic(new ImageView(imageCancel));
         
         HBox contenedor1 = new HBox();
 
@@ -183,17 +192,17 @@ public class CentroEspecializado {
         Label label = new Label("DATOS");
         label.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
         Label ruc = new Label("Código: ");
-        ruc.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        ruc.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         Label nombre = new Label("Nombre: ");
-        nombre.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        nombre.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         Label direccion = new Label("Dirección: ");
-        direccion.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        direccion.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         Label email = new Label("Email: ");
-        email.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        email.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         Label telefono = new Label("Teléfono: ");
-        telefono.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        telefono.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         Label idUsuario = new Label("Id Usuario: ");
-        idUsuario.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        idUsuario.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
 
         Label res_ruc = new Label();
         Label res_nombre = new Label();
@@ -204,15 +213,15 @@ public class CentroEspecializado {
         
         
         Label ruc1 = new Label("Código: ");
-        ruc1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        ruc1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         Label nombre1 = new Label("Nombre: ");
-        nombre1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        nombre1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         Label direccion1 = new Label("Dirección: ");
-        direccion1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        direccion1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         Label email1 = new Label("Email: ");
-        email1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        email1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         Label telefono1 = new Label("Teléfono: ");
-        telefono1.setFont(Font.font("Cambria", FontWeight.BOLD, 15));
+        telefono1.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
 
         
         
@@ -252,11 +261,13 @@ public class CentroEspecializado {
         
         
         HBox hboxOptions = new HBox();
-        hboxOptions.getChildren().addAll(clear,save,cancel);
+        hboxOptions.getChildren().addAll(clear, save, cancel);
+        hboxOptions.setAlignment(Pos.CENTER);
+        hboxOptions.setSpacing(40);
         
         info2 = new VBox();
         info2.getChildren().addAll(hboxRuc1, hboxNombre1, hboxDireccion1, hboxTelefono1, hboxEmail1, hboxOptions);
-        info2.setSpacing(1);
+        info2.setSpacing(5);
         info2.setPadding(new Insets(10, 10, 10, 10));
         
         sp1.setContent(info2);
@@ -288,7 +299,7 @@ public class CentroEspecializado {
         });
         
         contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, plus, modif, back);
-        contenedor1.setSpacing(50);
+        contenedor1.setSpacing(52);
         
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
