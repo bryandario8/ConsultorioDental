@@ -50,7 +50,7 @@ public class Citas {
         this.crearCita = new Button("Crear cita");
         crearCita.setPrefSize(100, 30);
         
-        this.enCita = new Button(" En Cita ");
+        this.enCita = new Button("En cita");
         enCita.setPrefSize(100, 30);
         
         this.noSe = new Button(" ");
@@ -144,17 +144,17 @@ public class Citas {
     public void actualizaarScene() {
         switch (this.cargo) {
             case "Administrador":
-                System.out.println("Ingreso un administrador");
+                System.out.println("Ingresó un administrador");
                 this.botones1.getChildren().clear();
                 this.botones1.getChildren().addAll(this.crearCita, this.enCita, this.noSe,this.back);
                 break;
             case "Profesional":
-                System.out.println("Ingreso un administrador");
+                System.out.println("Ingresó un administrador");
                 this.botones1.getChildren().clear();
                 this.botones1.getChildren().addAll(this.crearCita, this.enCita, this.noSe,this.back);
                 break;
             case "Asistente":
-                System.out.println("Ingreso un administrador");
+                System.out.println("Ingresó un administrador");
                 this.botones1.getChildren().clear();
                 this.botones1.getChildren().addAll(this.crearCita, this.noSe,this.back);
                 break;

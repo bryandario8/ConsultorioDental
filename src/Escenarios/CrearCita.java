@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Escenarios;
 
 import Constantes.Settings;
@@ -21,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -43,6 +39,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  *
@@ -94,7 +91,7 @@ public class CrearCita {
         
         ToggleGroup group = new ToggleGroup();
 
-        RadioButton rb1 = new RadioButton("Cedula");
+        RadioButton rb1 = new RadioButton("Cédula");
         rb1.setToggleGroup(group);
         rb1.setUserData("A");
 
@@ -125,25 +122,31 @@ public class CrearCita {
         tf_search = new TextField("");
 
         search = new Button("Search");
+        Image imageSearch = new Image(getClass().getResourceAsStream("/Img/search.png"));
+        search.setGraphic(new ImageView(imageSearch));
+        
         back = new Button("Back");
+        Image imageBack = new Image(getClass().getResourceAsStream("/Img/back.gif"));
+        back.setGraphic(new ImageView(imageBack));
 
         HBox contenedor1 = new HBox();
+        contenedor1.setSpacing(40);
 
         table.setEditable(true);
 
-        TableColumn cedula = new TableColumn("cedula");
+        TableColumn cedula = new TableColumn("Cédula");
         cedula.impl_setReorderable(false);
         cedula.setMinWidth(100);
         cedula.setCellValueFactory(
                 new PropertyValueFactory<DataPaciente, String>("cedula"));
 
-        TableColumn nombre = new TableColumn("nombre");
+        TableColumn nombre = new TableColumn("Nombre");
         nombre.impl_setReorderable(false);
         nombre.setMinWidth(100);
         nombre.setCellValueFactory(
                 new PropertyValueFactory<DataPaciente, String>("nombre"));
 
-        TableColumn apellido = new TableColumn("apellido");
+        TableColumn apellido = new TableColumn("Apellido");
         apellido.impl_setReorderable(false);
         apellido.setMinWidth(180);
         apellido.setCellValueFactory(
@@ -152,7 +155,7 @@ public class CrearCita {
         table.getColumns().addAll(cedula, nombre, apellido);
 
         final Label label = new Label("Pacientes");
-        label.setFont(new Font("Arial", 20));
+        label.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
 
         final ScrollPane sp = new ScrollPane();
         sp.setVmax(3);
@@ -164,10 +167,13 @@ public class CrearCita {
         sp2.setPrefSize(400, 375);
         sp2.setContent(table);
 
-        Label fecha = new Label("Fecha(dd/mm/yyyy): ");
+        Label fecha = new Label("Fecha: ");
+        fecha.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         tf_fecha = new DatePicker();
 
-        Label hora = new Label("Hora(hh:mm): ");
+        Label hora = new Label("Hora: ");
+        hora.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        
         tf_hora = new ComboBox();
         llenarComboBoxHora();
         tf_hora.setPromptText("Horas Disponibles");
@@ -179,17 +185,20 @@ public class CrearCita {
         temp2.getChildren().addAll(hora, tf_hora);
         temp2.setAlignment(Pos.CENTER);
 
-        final Label label1 = new Label("Fecha de cita");
-        label1.setFont(new Font("Arial", 20));
+        final Label label1 = new Label("Fecha de Cita");
+        label1.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
 
         VBox info1 = new VBox();
         info1.getChildren().addAll(label1, temp1, temp2);
         info1.setSpacing(10);
         info1.setAlignment(Pos.CENTER);
 
-        Label fechaCita = new Label("Dia : ");
-        Label horaCita = new Label("Hora : ");
-        Label pacienteCita = new Label("Paciente : ");
+        Label fechaCita = new Label("Día: ");
+        fechaCita.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label horaCita = new Label("Hora: ");
+        horaCita.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
+        Label pacienteCita = new Label("Paciente: ");
+        pacienteCita.setFont(Font.font("Cambria", FontWeight.BOLD, 13));
         detalle = new TextArea();
         detalle.setMinSize(390, 100);
         detalle.setMaxSize(390, 100);
@@ -208,24 +217,31 @@ public class CrearCita {
         hBoxpacienteCita.getChildren().addAll(pacienteCita, dataPacienteCita);
         hBoxDetalle.getChildren().addAll(detalle);
 
-        Label label2 = new Label("Resumen de cita");
-        label2.setFont(new Font("Arial", 20));
-        Label label3 = new Label("Detalle de cita");
-        label3.setFont(new Font("Arial", 20));
+        Label label2 = new Label("Resumen");
+        label2.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
+        Label label3 = new Label("Detalle");
+        label3.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
 
         VBox resumen = new VBox();
         resumen.getChildren().addAll(label2, hBoxFechaCita, hBoxHoraCita, hBoxpacienteCita, label3, hBoxDetalle);
         resumen.setAlignment(Pos.CENTER);
+        resumen.setSpacing(5);
+        resumen.setPadding(new Insets(10, 10, 10, 10));
 
         final ScrollPane sp1 = new ScrollPane();
         sp1.setVmax(3);
         sp1.setPrefSize(400, 375);
 
-        clean = new Button("Limpiar campos");
-        check = new Button("Connfirmar cita");
+        clean = new Button("Clear");
+        Image imageClear = new Image(getClass().getResourceAsStream("/Img/clear.png"));
+        clean.setGraphic(new ImageView(imageClear));
+        
+        check = new Button("Confirmar cita");
+        Image imageCheck = new Image(getClass().getResourceAsStream("/Img/check.png"));
+        check.setGraphic(new ImageView(imageCheck));
 
         HBox botonesResumen = new HBox();
-        botonesResumen.getChildren().addAll(clean, check);
+        botonesResumen.getChildren().addAll(check, clean);
         botonesResumen.setSpacing(20);
         botonesResumen.setAlignment(Pos.CENTER);
 
@@ -250,6 +266,8 @@ public class CrearCita {
         });
 
         contenedor1.getChildren().addAll(contenedorRadio, tf_search, search, back);
+        contenedor1.setSpacing(48);
+        
         VBox contenedorGeneral = new VBox();
         HBox contenedor2 = new HBox();
         VBox contenedorTablas = new VBox();
